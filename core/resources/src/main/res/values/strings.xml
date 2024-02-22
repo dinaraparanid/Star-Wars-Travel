@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="planets">Planets</string>
+    <string name="settings">Settings</string>
+    <string name="about_app">About App</string>
+</resources>
