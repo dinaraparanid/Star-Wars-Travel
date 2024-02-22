@@ -6,7 +6,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import com.paranid5.star_wars_travel.core.common.entities.Planet
+import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.WookiepediaPlanet
 
 class RootNavigator(componentContext: ComponentContext) : ComponentContext by componentContext {
     private val navigation = StackNavigation<RootConfig>()
@@ -23,7 +23,7 @@ class RootNavigator(componentContext: ComponentContext) : ComponentContext by co
     fun navigateToPlanets() =
         navigation.bringToFront(RootConfig.Planets)
 
-    fun navigateToPlanet(planet: Planet) =
+    fun navigateToPlanet(planet: WookiepediaPlanet) =
         navigation.bringToFront(RootConfig.Planet(planet))
 
     fun navigateToSettings() =
@@ -43,7 +43,7 @@ class RootNavigator(componentContext: ComponentContext) : ComponentContext by co
     inline val planetsComponent
         get() = PlanetsComponent(this)
 
-    fun planetComponent(planet: Planet) =
+    fun planetComponent(planet: WookiepediaPlanet) =
         PlanetComponent(planet, this)
 
     inline val aboutAppComponent

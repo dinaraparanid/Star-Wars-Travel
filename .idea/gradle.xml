@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/core/common" />
             <option value="$PROJECT_DIR$/core/impl" />
             <option value="$PROJECT_DIR$/core/resources" />
+            <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/about_app" />
             <option value="$PROJECT_DIR$/features/planets" />

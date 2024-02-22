@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Planet(
+data class SwapiPlanet(
     val name: String,
     @SerialName("rotation_period") val rotationPeriod: Int,
     @SerialName("orbital_period") val orbitalPeriod: Int,
@@ -12,6 +12,6 @@ data class Planet(
     val climate: String,
     val gravity: String,
     val terrain: String,
-    @SerialName("surface_water") val surfaveWater: Int,
-    val population: Int,
+    @SerialName("surface_water") val surfaveWater: String,
+    val population: String,
 )

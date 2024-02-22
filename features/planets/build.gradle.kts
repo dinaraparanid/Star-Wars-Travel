@@ -39,7 +39,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:resources"))
+    api(project(":core:common"))
+    api(project(":core:resources"))
+    api(project(":core:impl"))
+    api(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -52,6 +55,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.material)
+
+    implementation(libs.kotlinx.collections.immutable)
+
+    implementation(libs.coil.compose)
+
+    implementation(libs.ktor.client.core)
+
+    implementation(libs.koin.androidx.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

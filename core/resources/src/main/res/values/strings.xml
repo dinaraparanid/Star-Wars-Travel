@@ -3,4 +3,10 @@
     <string name="planets">Planets</string>
     <string name="settings">Settings</string>
     <string name="about_app">About App</string>
+    <string name="planet_preview">Planet preview</string>
+    <string name="secret_location">Secret location</string>
+    <string name="climate_label">Climate: %1$s</string>
+    <string name="gravity_label">Gravity: %1$s</string>
+    <string name="population_label">Population: %1$s</string>
+    <string name="no_planet_description">Be the first to visit this planet!</string>
 </resources>

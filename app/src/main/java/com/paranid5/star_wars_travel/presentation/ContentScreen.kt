@@ -11,15 +11,18 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.paranid5.star_wars_travel.about_app.presentation.AboutAppScreen
 import com.paranid5.star_wars_travel.navigation.component.RootComponentChild
-import com.paranid5.star_wars_travel.planets.presentation.PlanetScreen
-import com.paranid5.star_wars_travel.planets.presentation.PlanetsScreen
+import com.paranid5.star_wars_travel.planets.presentation.planet.PlanetScreen
+import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsScreen
+import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsViewModule
 import com.paranid5.star_wars_travel.presentation.composition_locals.LocalNavigator
 import com.paranid5.star_wars_travel.settings.presentation.SettingsScreen
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ContentScreen(
     paddingValues: PaddingValues,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    planetsViewModule: PlanetsViewModule = koinViewModel(),
 ) {
     val navigator = LocalNavigator.current!!
 
@@ -31,10 +34,9 @@ fun ContentScreen(
             bottom = paddingValues.calculateBottomPadding()
         )
     ) {
-        println(it.instance)
-
         when (it.instance) {
             is RootComponentChild.PlanetsChild -> PlanetsScreen(
+                planetsViewModule = planetsViewModule,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = 8.dp, start = 8.dp, end = 8.dp)

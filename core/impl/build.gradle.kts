@@ -34,11 +34,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.material)
+
+    implementation(libs.kotlinx.collections.immutable)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

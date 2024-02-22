@@ -1,4 +1,4 @@
-package com.paranid5.star_wars_travel.planets.presentation
+package com.paranid5.star_wars_travel.planets.presentation.planet
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

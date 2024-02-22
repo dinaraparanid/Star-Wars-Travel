@@ -1,6 +1,7 @@
 [versions]
 agp = "8.4.0-alpha10"
 decompose = "2.2.2"
+jsoup = "1.17.2"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -25,6 +26,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-material = { module = "androidx.compose.material:material", version.ref = "materialVersion" }
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-extensions-compose = { group = "com.arkivanov.decompose", name = "extensions-compose-jetpack",  version.ref = "decompose" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

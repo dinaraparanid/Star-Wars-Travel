@@ -11,8 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.paranid5.star_wars_travel.navigation.component.RootComponentChild
 import com.paranid5.star_wars_travel.presentation.composition_locals.LocalNavigator
-import com.paranid5.star_wars_travel.presentation.ui.theme.LocalAppColors
 import com.paranid5.star_wars_travel.resources.R
+import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
 fun AppBar(modifier: Modifier = Modifier) {
