@@ -2,6 +2,15 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    alias(libs.plugins.sqldelight)
+}
+
+sqldelight {
+    databases {
+        create("Planets") {
+            packageName.set("com.paranid5.star_wars_travel.data")
+        }
+    }
 }
 
 android {
@@ -49,6 +58,9 @@ dependencies {
     implementation(libs.ktor.serialization.kotlinx.json)
 
     implementation(libs.koin.androidx.compose)
+
+    implementation(libs.sqldelight.android.driver)
+    implementation(libs.sqldelight.coroutines.extensions)
 
     implementation(libs.jsoup)
 

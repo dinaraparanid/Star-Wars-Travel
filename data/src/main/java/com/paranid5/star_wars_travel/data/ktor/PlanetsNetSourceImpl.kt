@@ -1,10 +1,9 @@
-package com.paranid5.star_wars_travel.data.sources.planets
+package com.paranid5.star_wars_travel.data.ktor
 
 import com.paranid5.star_wars_travel.core.common.entities.PlanetPage
-import com.paranid5.star_wars_travel.data.ktor.getPlanets
 import io.ktor.client.HttpClient
 
-class PlanetsSourceImpl(private val ktorClient: HttpClient) : PlanetsSource {
+class PlanetsNetSourceImpl(private val ktorClient: HttpClient) : PlanetsNetSource {
     override suspend fun fetchPlanets(pageNum: Int): PlanetPage =
         ktorClient.getPlanets(pageNum)
 }

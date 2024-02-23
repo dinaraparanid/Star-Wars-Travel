@@ -11,25 +11,13 @@ internal suspend inline fun Element.astrographicalInfo(planet: SwapiPlanet) =
         AstrographicalInformation(
             rotationPeriod = planet.rotationPeriod,
             orbitalPeriod = planet.orbitalPeriod,
-            region = astroInfo("region"),
-            sector = astroInfo("sector").firstOrNull(),
-            system = astroInfo("system").firstOrNull(),
-            moons = astroInfo("moons").firstOrNull()?.toIntOrNull() ?: 0,
-            tradeRoutes = astroInfo("routes")
+            region = info("region"),
+            sector = info("sector").firstOrNull(),
+            system = info("system").firstOrNull(),
+            moons = info("moons").firstOrNull()?.toIntOrNull() ?: 0,
+            tradeRoutes = info("routes")
         )
     }
-
-private fun Element.astroInfo(selector: String) =
-    runCatching {
-        select("div[*=$selector]")
-            .select("div")
-            .filterNot {
-                it.tagName() != "sup"
-                        && it.tagName() != "h3"
-                        && it.text() != "unknown"
-            }
-            .map(Element::text)
-    }.getOrElse { emptyList() }
 
 internal fun defaultAstroInfo(planet: SwapiPlanet) =
     AstrographicalInformation(

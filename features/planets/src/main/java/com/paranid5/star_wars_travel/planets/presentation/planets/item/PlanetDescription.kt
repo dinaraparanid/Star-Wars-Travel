@@ -44,14 +44,11 @@ fun PlanetDescription(planet: PlanetUiState, modifier: Modifier = Modifier) =
         Spacer(Modifier.height(2.dp))
 
         PlanetInfoLabel(
-            info = stringResource(R.string.gravity_label, planet.physicalInformation.gravity),
+            info = stringResource(R.string.population_label, planet.societalInformation.population),
             modifier = Modifier.fillMaxWidth()
         )
 
-        PlanetInfoLabel(
-            info = stringResource(R.string.gravity_label, planet.societalInformation.population),
-            modifier = Modifier.fillMaxWidth()
-        )
+        Spacer(Modifier.height(2.dp))
 
         PlanetInfoLabel(
             info = planet.description ?: stringResource(R.string.no_planet_description),

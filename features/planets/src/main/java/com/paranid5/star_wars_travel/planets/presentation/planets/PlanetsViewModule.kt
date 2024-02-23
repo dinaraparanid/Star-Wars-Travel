@@ -1,35 +1,36 @@
 package com.paranid5.star_wars_travel.planets.presentation.planets
 
 import androidx.lifecycle.ViewModel
-import com.paranid5.star_wars_travel.core.common.entities.PlanetPage
-import com.paranid5.star_wars_travel.data.sources.planets.PlanetsSource
-import com.paranid5.star_wars_travel.data.sources.planets.PlanetsSourceImpl
+import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.WookiepediaPlanet
+import com.paranid5.star_wars_travel.data.PlanetsRepository
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
-import io.ktor.client.HttpClient
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
-class PlanetsViewModule(ktorClient: HttpClient) : ViewModel(), PlanetsSource by PlanetsSourceImpl(ktorClient) {
+class PlanetsViewModule(private val planetsRepository: PlanetsRepository) : ViewModel() {
     private val planetsPagesState by lazy {
-        MutableStateFlow(emptyMap<Int, PlanetPage>())
+        MutableStateFlow(emptyMap<Int, List<String>>())
     }
 
     val planetsFlow by lazy {
-        planetsPagesState.map {
-            it.values
-                .flatMap(PlanetPage::planets)
-                .map(::PlanetUiState)
-                .toPersistentList()
+        planetsRepository.planetsFlow.map {
+            it.map(::PlanetUiState).toPersistentList()
         }
     }
 
     suspend fun fetchAndStorePlanets(pageNum: Int = 1) {
-        val page = fetchPlanets(pageNum)
+        val planets = planetsRepository
+            .fetchPlanets(pageNum)
+            .planets
 
-         planetsPagesState.update {
-             it + mapOf(pageNum to page)
-         }
+        planetsPagesState.update {
+            it + mapOf(pageNum to planets.map(WookiepediaPlanet::title))
+        }
+
+        planets.forEach {
+            planetsRepository.addPlanetAsync(it)
+        }
     }
 }

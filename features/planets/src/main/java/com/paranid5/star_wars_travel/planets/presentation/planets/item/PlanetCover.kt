@@ -31,9 +31,7 @@ internal fun PlanetCover(
         contentDescription = stringResource(R.string.planet_preview),
         alignment = Alignment.Center,
         contentScale = ContentScale.Crop,
-        modifier = modifier
-            .size(80.dp)
-            .clip(RoundedCornerShape(8.dp))
+        modifier = modifier.clip(RoundedCornerShape(8.dp))
     )
 }
 

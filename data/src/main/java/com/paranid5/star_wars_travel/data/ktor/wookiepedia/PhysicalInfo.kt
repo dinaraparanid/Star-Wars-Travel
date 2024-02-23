@@ -14,25 +14,13 @@ internal suspend inline fun Element.physicalInfo(planet: SwapiPlanet) =
             terrain = planet.terrain,
             surfaceWater = planet.surfaveWater.toIntOrNull() ?: 0,
             diameter = planet.diameter,
-            planetClass = physInfo("class").firstOrNull(),
-            atmosphere = physInfo("atmosphere").firstOrNull(),
-            interest = physInfo("interest"),
-            flora = physInfo("flora"),
-            fauna = physInfo("fauna")
+            planetClass = info("class").firstOrNull(),
+            atmosphere = info("atmosphere").firstOrNull(),
+            interest = info("interest"),
+            flora = info("flora"),
+            fauna = info("fauna")
         )
     }
-
-private fun Element.physInfo(selector: String) =
-    runCatching {
-        select("div[*=$selector]")
-            .select("div")
-            .filterNot {
-                it.tagName() != "sup"
-                        && it.tagName() != "h3"
-                        && it.text() != "unknown"
-            }
-            .map(Element::text)
-    }.getOrElse { emptyList() }
 
 internal fun defaultPhysInfo(planet: SwapiPlanet) =
     PhysicalInformation(

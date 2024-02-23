@@ -10,25 +10,13 @@ internal suspend inline fun Element.societalInfo(planet: SwapiPlanet) =
     withContext(Dispatchers.IO) {
         SocietalInformation(
             population = planet.population.toIntOrNull() ?: 0,
-            nativeSpecies = socInfo("species"),
-            otherSpecies = socInfo("otherspecies"),
-            primaryLanguages = socInfo("language"),
-            government = socInfo("government").firstOrNull(),
-            majorCities = socInfo("cities"),
+            nativeSpecies = info("species"),
+            otherSpecies = info("otherspecies"),
+            primaryLanguages = info("language"),
+            government = info("government").firstOrNull(),
+            majorCities = info("cities"),
         )
     }
-
-private fun Element.socInfo(selector: String) =
-    runCatching {
-        select("div[*=$selector]")
-            .select("div")
-            .filterNot {
-                it.tagName() != "sup"
-                        && it.tagName() != "h3"
-                        && it.text() != "unknown"
-            }
-            .map(Element::text)
-    }.getOrElse { emptyList() }
 
 internal fun defaultSocInfo(planet: SwapiPlanet) =
     SocietalInformation(population = planet.population.toIntOrNull() ?: 0)

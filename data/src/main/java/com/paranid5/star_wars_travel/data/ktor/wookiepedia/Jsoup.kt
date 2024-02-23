@@ -1,6 +1,5 @@
 package com.paranid5.star_wars_travel.data.ktor.wookiepedia
 
-import android.util.Log
 import com.paranid5.star_wars_travel.core.common.entities.SwapiPlanet
 import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.WookiepediaPlanet
 import com.paranid5.star_wars_travel.data.ktor.USER_AGENT
@@ -13,10 +12,11 @@ import org.jsoup.parser.Parser
 
 private const val WOOKIEPEDIA_BASE_URL = "https://starwars.fandom.com/wiki"
 
+internal val CITATION_REGEX = Regex("\\[\\d+]")
+
 suspend fun PlanetDTO(planet: SwapiPlanet) = coroutineScope {
     val html = PlanetHtml(planet.name)
     val shortDescription = html.shortDescription().getOrNull()
-    Log.d("BEBRA", "Image: ${html.planetUrlCover().getOrNull()}")
 
     WookiepediaPlanet(
         title = planet.name,
@@ -46,16 +46,20 @@ private suspend inline fun PlanetHtml(planet: String): Element =
 
 private suspend inline fun Element.planetDescription() = runCatching {
     withContext(Dispatchers.IO) {
-        select("meta[property=og:description]")
-            .attr("content")
+        select("div[class=mw-parser-output]")
+            .firstOrNull()
+            ?.children()
+            ?.filterNot { it.tagName() != "p" }
+            ?.drop(1)
+            ?.firstOrNull()
+            ?.text()
+            ?.replace(CITATION_REGEX, "")
     }
 }
 
 private suspend inline fun Element.shortDescription() = runCatching {
     withContext(Dispatchers.IO) {
-        select("aside[*=region]")
-            .select("section")
-            .firstOrNull()
+        select("aside[role=region]").firstOrNull()
     }
 }
 
