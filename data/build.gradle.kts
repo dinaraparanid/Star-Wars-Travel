@@ -49,6 +49,9 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.ktor.client.core)

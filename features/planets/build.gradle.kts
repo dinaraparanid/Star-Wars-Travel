@@ -57,6 +57,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.material)
 
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+
     implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.coil.compose)

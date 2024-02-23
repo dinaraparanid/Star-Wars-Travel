@@ -1,4 +1,4 @@
-package com.paranid5.star_wars_travel.core.common.entities
+package com.paranid5.star_wars_travel.core.common.domain.entities
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SwapiPlanet(
     val name: String,
-    @SerialName("rotation_period") val rotationPeriod: Int,
-    @SerialName("orbital_period") val orbitalPeriod: Int,
+    @SerialName("rotation_period") val rotationPeriod: String,
+    @SerialName("orbital_period") val orbitalPeriod: String,
     val diameter: Int,
     val climate: String,
     val gravity: String,

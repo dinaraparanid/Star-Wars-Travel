@@ -2,7 +2,7 @@ package com.paranid5.star_wars_travel.impl.presentation
 
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.WookiepediaPlanet
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
 import kotlinx.parcelize.Parcelize
 
 @Immutable

@@ -1,6 +1,6 @@
 package com.paranid5.star_wars_travel.data.sqldelight
 
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.WookiepediaPlanet
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 

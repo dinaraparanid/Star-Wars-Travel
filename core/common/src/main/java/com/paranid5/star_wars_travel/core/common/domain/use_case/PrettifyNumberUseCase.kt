@@ -1,4 +1,4 @@
-package com.paranid5.star_wars_travel.core.common.use_case
+package com.paranid5.star_wars_travel.core.common.domain.use_case
 
 private val NUMBER_REGEX = Regex("(\\d+)")
 

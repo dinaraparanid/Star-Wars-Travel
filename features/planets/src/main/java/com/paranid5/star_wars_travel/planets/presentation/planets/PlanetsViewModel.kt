@@ -1,15 +1,15 @@
 package com.paranid5.star_wars_travel.planets.presentation.planets
 
 import androidx.lifecycle.ViewModel
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.WookiepediaPlanet
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.filter
+import androidx.paging.map
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
 import com.paranid5.star_wars_travel.data.PlanetsRepository
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
 import com.paranid5.star_wars_travel.impl.presentation.mainRegion
-import com.paranid5.star_wars_travel.impl.use_case.filterByRegions
-import com.paranid5.star_wars_travel.impl.use_case.filterBySearchQuery
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toImmutableList
-import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,14 +33,18 @@ class PlanetsViewModel(private val planetsRepository: PlanetsRepository) : ViewM
     fun setSearchText(text: String) =
         _searchTextState.update { text }
 
-    private val selectedRegionsState by lazy {
+    private val _selectedRegionsState by lazy {
         MutableStateFlow(listOf<String?>(null))
+    }
+
+    val selectedRegionsState by lazy {
+        _selectedRegionsState.asStateFlow()
     }
 
     fun reselectRegion(region: String?) =
         when (region) {
-            null -> selectedRegionsState.update { listOf(null) }
-            else -> selectedRegionsState.update {
+            null -> _selectedRegionsState.update { listOf(null) }
+            else -> _selectedRegionsState.update {
                 when {
                     region in it -> if (it.size == 1) listOf(null) else it - region
                     else -> it - null + region
@@ -51,19 +55,18 @@ class PlanetsViewModel(private val planetsRepository: PlanetsRepository) : ViewM
     @OptIn(ExperimentalCoroutinesApi::class)
     private val planetsUiFlow by lazy {
         planetsRepository
-            .planetsFlow
+            .planetsPagedFlow
             .mapLatest { planets ->
-                planets
-                    .map(::PlanetUiState)
-                    .toPersistentList()
+                planets.map { PlanetUiState(it) }
             }
+            .cachedIn(viewModelScope)
     }
 
     val planetsFlow by lazy {
         combine(
             planetsUiFlow,
             searchTextState,
-            selectedRegionsState
+            _selectedRegionsState
         ) { planets, searchText, selectRegions ->
             when {
                 searchText.isBlank() -> planets.filterByRegions(selectRegions)
@@ -74,8 +77,11 @@ class PlanetsViewModel(private val planetsRepository: PlanetsRepository) : ViewM
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val regionsFlow by lazy {
-        combine(planetsUiFlow, selectedRegionsState) { planets, regs ->
-            persistentListOf(null) + planets.mapNotNull { it.mainRegion }.distinct() to regs
+        combine(planetsUiFlow, _selectedRegionsState) { planets, regs ->
+            planets
+                .map { it.mainRegion ?: "" }
+                .filter { it.isNotEmpty() }
+                .to(regs)
         }.mapLatest { (allRegs, selectRegs) ->
             allRegs.map { it to (it in selectRegs) }
         }
@@ -83,7 +89,7 @@ class PlanetsViewModel(private val planetsRepository: PlanetsRepository) : ViewM
 
     suspend fun fetchAndStorePlanets(pageNum: Int = 1) {
         val planets = planetsRepository
-            .fetchPlanets(pageNum)
+            .fetchPlanetPage(pageNum)
             .planets
 
         planetsPagesState.update {
@@ -95,3 +101,12 @@ class PlanetsViewModel(private val planetsRepository: PlanetsRepository) : ViewM
         }
     }
 }
+
+fun PagingData<PlanetUiState>.filterByRegions(regions: List<String?>) =
+    when {
+        null in regions -> this
+        else -> filter { it.mainRegion in regions }
+    }
+
+fun PagingData<PlanetUiState>.filterBySearchQuery(searchText: String) =
+    filter { searchText in it.title.lowercase() }

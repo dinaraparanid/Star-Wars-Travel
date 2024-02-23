@@ -12,6 +12,7 @@ activityCompose = "1.8.2"
 composeBom = "2024.02.01"
 jetbrainsKotlinJvm = "1.9.0"
 materialVersion = "1.7.0-alpha03"
+pagingRuntime = "3.2.1"
 sqlDelight = "2.0.1"
 coilCompose = "2.5.0"
 koinAndroidxCompose = "3.5.3"
@@ -25,6 +26,8 @@ constraintlayoutCompose = "1.0.1"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "materialVersion" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingRuntime" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingRuntime" }
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-extensions-compose = { group = "com.arkivanov.decompose", name = "extensions-compose-jetpack",  version.ref = "decompose" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }

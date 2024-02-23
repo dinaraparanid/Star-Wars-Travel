@@ -1,7 +1,7 @@
 package com.paranid5.star_wars_travel.data.ktor.wookiepedia
 
-import com.paranid5.star_wars_travel.core.common.entities.SwapiPlanet
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.PhysicalInformation
+import com.paranid5.star_wars_travel.core.common.domain.entities.SwapiPlanet
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.PhysicalInformation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jsoup.nodes.Element

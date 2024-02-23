@@ -1,4 +1,4 @@
-package com.paranid5.star_wars_travel.core.common.entities.wookiepedia
+package com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia
 
 import kotlinx.serialization.Serializable
 

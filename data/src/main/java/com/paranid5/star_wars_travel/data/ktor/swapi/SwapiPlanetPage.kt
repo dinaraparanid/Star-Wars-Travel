@@ -1,6 +1,6 @@
 package com.paranid5.star_wars_travel.data.ktor.swapi
 
-import com.paranid5.star_wars_travel.core.common.entities.SwapiPlanet
+import com.paranid5.star_wars_travel.core.common.domain.entities.SwapiPlanet
 import kotlinx.serialization.Serializable
 
 @Serializable

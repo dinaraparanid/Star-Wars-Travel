@@ -8,7 +8,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
-import com.paranid5.star_wars_travel.core.common.use_case.prettifyNumber
+import com.paranid5.star_wars_travel.core.common.domain.use_case.prettifyNumber
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable

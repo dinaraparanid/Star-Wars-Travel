@@ -6,7 +6,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.WookiepediaPlanet
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
 
 class RootNavigator(componentContext: ComponentContext) : ComponentContext by componentContext {
     private val navigation = StackNavigation<RootConfig>()

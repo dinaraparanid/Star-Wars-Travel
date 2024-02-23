@@ -3,10 +3,10 @@ package com.paranid5.star_wars_travel.data.sqldelight
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.AstrographicalInformation
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.PhysicalInformation
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.SocietalInformation
-import com.paranid5.star_wars_travel.core.common.entities.wookiepedia.WookiepediaPlanet
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.AstrographicalInformation
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.PhysicalInformation
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.SocietalInformation
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
 import com.paranid5.star_wars_travel.data.Planets
 import com.paranid5.starwarstravel.data.PlanetsQueries
 import com.paranid5.starwarstravel.data.SelectBaseItems

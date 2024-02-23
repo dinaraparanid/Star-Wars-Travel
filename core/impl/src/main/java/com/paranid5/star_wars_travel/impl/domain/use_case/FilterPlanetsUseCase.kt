@@ -1,4 +1,4 @@
-package com.paranid5.star_wars_travel.impl.use_case
+package com.paranid5.star_wars_travel.impl.domain.use_case
 
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
 import com.paranid5.star_wars_travel.impl.presentation.mainRegion
