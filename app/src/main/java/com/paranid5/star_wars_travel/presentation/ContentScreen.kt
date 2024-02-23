@@ -13,7 +13,7 @@ import com.paranid5.star_wars_travel.about_app.presentation.AboutAppScreen
 import com.paranid5.star_wars_travel.navigation.component.RootComponentChild
 import com.paranid5.star_wars_travel.planets.presentation.planet.PlanetScreen
 import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsScreen
-import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsViewModule
+import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsViewModel
 import com.paranid5.star_wars_travel.presentation.composition_locals.LocalNavigator
 import com.paranid5.star_wars_travel.settings.presentation.SettingsScreen
 import org.koin.androidx.compose.koinViewModel
@@ -22,7 +22,7 @@ import org.koin.androidx.compose.koinViewModel
 fun ContentScreen(
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
-    planetsViewModule: PlanetsViewModule = koinViewModel(),
+    planetsViewModel: PlanetsViewModel = koinViewModel(),
 ) {
     val navigator = LocalNavigator.current!!
 
@@ -36,10 +36,10 @@ fun ContentScreen(
     ) {
         when (it.instance) {
             is RootComponentChild.PlanetsChild -> PlanetsScreen(
-                planetsViewModule = planetsViewModule,
+                planetsViewModel = planetsViewModel,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 8.dp, start = 8.dp, end = 8.dp)
+                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
             )
 
             is RootComponentChild.PlanetChild -> PlanetScreen(

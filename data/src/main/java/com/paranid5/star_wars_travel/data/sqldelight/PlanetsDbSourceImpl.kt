@@ -42,6 +42,7 @@ internal class PlanetsDbSourceImpl(driver: SqlDriver) :
                 items.map { item ->
                     WookiepediaPlanet(
                         title = item.title,
+                        edited = item.edited,
                         description = item.description,
                         coverUrl = item.coverUrl,
                         astrographicalInformation = queries.parseAstroInfo(item),
@@ -94,7 +95,7 @@ internal fun PlanetsQueries.parsePhysicalInfo(item: SelectBaseItems) =
 
 internal fun PlanetsQueries.parseSocInfo(item: SelectBaseItems) =
     SocietalInformation(
-        population = item.population.toInt(),
+        population = item.population,
         government = item.government,
         nativeSpecies = selectNativeSpecies(socInfoId = item.socInfoId)
             .executeAsList()
@@ -152,6 +153,7 @@ internal fun PlanetsQueries.insertPlanet(
     socInfoId: Long,
 ) = insertPlanet(
     title = planet.title,
+    edited = planet.edited,
     description = planet.description,
     coverUrl = planet.coverUrl,
     astroInfoId = astroInfoId,

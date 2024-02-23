@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Immutable
 @Parcelize
 data class SocInfo(
-    val population: Int,
+    val population: Long,
     val nativeSpecies: Array<String> = emptyArray(),
     val otherSpecies: Array<String> = emptyArray(),
     val primaryLanguages: Array<String> = emptyArray(),

@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS SocInfoCity (
 
 CREATE TABLE IF NOT EXISTS Planet (
     title TEXT PRIMARY KEY,
+    edited TEXT NOT NULL,
     description TEXT,
     coverUrl TEXT,
     astroInfoId INTEGER REFERENCES AstroInfo(id) ON DELETE CASCADE,
@@ -126,6 +127,7 @@ CREATE TABLE IF NOT EXISTS Planet (
 selectBaseItems:
 SELECT
     Planet.title AS title,
+    Planet.edited AS edited,
     Planet.description AS description,
     Planet.coverUrl AS coverUrl,
     AstroInfo.id AS astroInfoId,
@@ -153,7 +155,9 @@ FROM
 WHERE
     Planet.astroInfoId = AstroInfo.id AND
     Planet.physInfoId = PhysInfo.id AND
-    Planet.socInfoId = SocInfo.id;
+    Planet.socInfoId = SocInfo.id
+ORDER BY
+    Planet.edited ASC;
 
 selectRegions:
 SELECT
@@ -327,5 +331,5 @@ INSERT OR REPLACE INTO SocInfoCity (socInfoId, city)
 VALUES (?, ?);
 
 insertPlanet:
-INSERT OR REPLACE INTO Planet (title, description, coverUrl, astroInfoId, physInfoId, socInfoId)
-VALUES (?, ?, ?, ?, ?, ?);
+INSERT OR REPLACE INTO Planet (title, edited, description, coverUrl, astroInfoId, physInfoId, socInfoId)
+VALUES (?, ?, ?, ?, ?, ?, ?);

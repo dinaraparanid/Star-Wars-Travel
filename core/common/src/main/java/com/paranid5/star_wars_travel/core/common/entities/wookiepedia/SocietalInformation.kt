@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SocietalInformation(
-    val population: Int,
+    val population: Long,
     val nativeSpecies: List<String> = emptyList(),
     val otherSpecies: List<String> = emptyList(),
     val primaryLanguages: List<String> = emptyList(),

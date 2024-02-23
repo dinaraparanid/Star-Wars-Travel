@@ -14,4 +14,5 @@ data class SwapiPlanet(
     val terrain: String,
     @SerialName("surface_water") val surfaveWater: String,
     val population: String,
+    val edited: String
 )

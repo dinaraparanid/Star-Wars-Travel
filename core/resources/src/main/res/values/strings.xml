@@ -9,4 +9,14 @@
     <string name="gravity_label">Gravity: %1$s</string>
     <string name="population_label">Population: %1$s</string>
     <string name="no_planet_description">Be the first to visit this planet!</string>
+    <string name="unknown">Unknown</string>
+    <string name="planets_welcome_label">Your Journey Begins Here!</string>
+    <string name="planets_welcome_label_1">Your Journey</string>
+    <string name="planets_welcome_label_2">Begins Here!</string>
+    <string name="travel">Travel Now</string>
+    <string name="enjoy_journey_to">Enjoy your journey to %1$s!</string>
+    <string name="search">Search</string>
+    <string name="cancel_search">Cancel search</string>
+    <string name="enter_planet">Enter your planet here…</string>
+    <string name="all">All</string>
 </resources>

@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element
 internal suspend inline fun Element.societalInfo(planet: SwapiPlanet) =
     withContext(Dispatchers.IO) {
         SocietalInformation(
-            population = planet.population.toIntOrNull() ?: 0,
+            population = planet.population.toLongOrNull() ?: 0L,
             nativeSpecies = info("species"),
             otherSpecies = info("otherspecies"),
             primaryLanguages = info("language"),
@@ -19,4 +19,4 @@ internal suspend inline fun Element.societalInfo(planet: SwapiPlanet) =
     }
 
 internal fun defaultSocInfo(planet: SwapiPlanet) =
-    SocietalInformation(population = planet.population.toIntOrNull() ?: 0)
+    SocietalInformation(population = planet.population.toLongOrNull() ?: 0L)

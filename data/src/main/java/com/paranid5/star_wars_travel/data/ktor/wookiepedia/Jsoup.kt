@@ -20,6 +20,7 @@ suspend fun PlanetDTO(planet: SwapiPlanet) = coroutineScope {
 
     WookiepediaPlanet(
         title = planet.name,
+        edited = planet.edited,
         description = html.planetDescription().getOrNull(),
         coverUrl = html.planetUrlCover().getOrNull(),
         astrographicalInformation = shortDescription
