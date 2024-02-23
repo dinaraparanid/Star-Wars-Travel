@@ -8,7 +8,7 @@ data class SwapiPlanet(
     val name: String,
     @SerialName("rotation_period") val rotationPeriod: String,
     @SerialName("orbital_period") val orbitalPeriod: String,
-    val diameter: Int,
+    val diameter: String,
     val climate: String,
     val gravity: String,
     val terrain: String,

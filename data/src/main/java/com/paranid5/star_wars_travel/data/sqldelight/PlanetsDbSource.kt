@@ -7,5 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface PlanetsDbSource {
     val planetsFlow: Flow<List<WookiepediaPlanet>>
 
+    suspend fun getPlanets(): List<WookiepediaPlanet>
+
     fun addPlanetAsync(planet: WookiepediaPlanet): Job
 }

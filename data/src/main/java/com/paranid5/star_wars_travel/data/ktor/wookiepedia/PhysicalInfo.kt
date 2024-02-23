@@ -13,7 +13,7 @@ internal suspend inline fun Element.physicalInfo(planet: SwapiPlanet) =
             gravity = planet.gravity,
             terrain = planet.terrain,
             surfaceWater = planet.surfaveWater.toIntOrNull() ?: 0,
-            diameter = planet.diameter,
+            diameter = planet.diameter.toIntOrNull() ?: 0,
             planetClass = info("class").firstOrNull(),
             atmosphere = info("atmosphere").firstOrNull(),
             interest = info("interest"),
@@ -28,5 +28,5 @@ internal fun defaultPhysInfo(planet: SwapiPlanet) =
         gravity = planet.gravity,
         terrain = planet.terrain,
         surfaceWater = planet.surfaveWater.toIntOrNull() ?: 0,
-        diameter = planet.diameter
+        diameter = planet.diameter.toIntOrNull() ?: 0
     )

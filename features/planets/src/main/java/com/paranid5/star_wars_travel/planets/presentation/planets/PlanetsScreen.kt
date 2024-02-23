@@ -16,10 +16,6 @@ fun PlanetsScreen(
     planetsViewModel: PlanetsViewModel,
     modifier: Modifier = Modifier
 ) {
-    LaunchedEffect(Unit) {
-        planetsViewModel.fetchAndStorePlanets()
-    }
-
     Column(modifier) {
         PlanetsWelcomeLabel(
             Modifier

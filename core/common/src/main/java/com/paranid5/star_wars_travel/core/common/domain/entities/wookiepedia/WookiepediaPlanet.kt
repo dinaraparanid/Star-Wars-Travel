@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class WookiepediaPlanet(
     val title: String,
     val edited: String,
+    val pageNumber: Int,
     val astrographicalInformation: AstrographicalInformation,
     val physicalInformation: PhysicalInformation,
     val societalInformation: SocietalInformation,

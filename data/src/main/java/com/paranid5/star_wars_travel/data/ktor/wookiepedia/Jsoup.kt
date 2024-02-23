@@ -14,13 +14,14 @@ private const val WOOKIEPEDIA_BASE_URL = "https://starwars.fandom.com/wiki"
 
 internal val CITATION_REGEX = Regex("\\[\\d+]")
 
-suspend fun PlanetDTO(planet: SwapiPlanet) = coroutineScope {
+suspend fun PlanetDTO(planet: SwapiPlanet, pageNumber: Int) = coroutineScope {
     val html = PlanetHtml(planet.name)
     val shortDescription = html.shortDescription().getOrNull()
 
     WookiepediaPlanet(
         title = planet.name,
         edited = planet.edited,
+        pageNumber = pageNumber,
         description = html.planetDescription().getOrNull(),
         coverUrl = html.planetUrlCover().getOrNull(),
         astrographicalInformation = shortDescription

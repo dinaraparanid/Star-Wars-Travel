@@ -7,4 +7,4 @@ import io.ktor.client.request.get
 private const val SWAPI_BASE_URL = "https://swapi.dev/api"
 
 internal suspend fun HttpClient.getSwapiPlanets(page: Int) =
-    get("$SWAPI_BASE_URL/planets/?page=$page").body<SwapiPlanetPage>()
+    runCatching { get("$SWAPI_BASE_URL/planets/?page=$page").body<SwapiPlanetPage>() }

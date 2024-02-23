@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 
 internal class PlanetsDbSourceImpl(driver: SqlDriver) :
     PlanetsDbSource,
@@ -38,25 +39,33 @@ internal class PlanetsDbSourceImpl(driver: SqlDriver) :
             .selectBaseItems()
             .asFlow()
             .mapToList(Dispatchers.IO)
-            .mapLatest { items ->
-                items.map { item ->
-                    WookiepediaPlanet(
-                        title = item.title,
-                        edited = item.edited,
-                        description = item.description,
-                        coverUrl = item.coverUrl,
-                        astrographicalInformation = queries.parseAstroInfo(item),
-                        physicalInformation = queries.parsePhysicalInfo(item),
-                        societalInformation = queries.parseSocInfo(item)
-                    )
-                }
-            }
+            .mapLatest { it.map(queries::parsePlanet) }
+
+    override suspend fun getPlanets() =
+        withContext(Dispatchers.IO) {
+            queries
+                .selectBaseItems()
+                .executeAsList()
+                .map(queries::parsePlanet)
+        }
 
     override fun addPlanetAsync(planet: WookiepediaPlanet): Job =
         launch(Dispatchers.IO) {
             mutex.withLock { queries.addPlanet(planet) }
         }
 }
+
+internal fun PlanetsQueries.parsePlanet(item: SelectBaseItems) =
+    WookiepediaPlanet(
+        title = item.title,
+        edited = item.edited,
+        pageNumber = item.pageNumber.toInt(),
+        description = item.description,
+        coverUrl = item.coverUrl,
+        astrographicalInformation = parseAstroInfo(item),
+        physicalInformation = parsePhysicalInfo(item),
+        societalInformation = parseSocInfo(item)
+    )
 
 internal fun PlanetsQueries.parseAstroInfo(item: SelectBaseItems) =
     AstrographicalInformation(
@@ -154,6 +163,7 @@ internal fun PlanetsQueries.insertPlanet(
 ) = insertPlanet(
     title = planet.title,
     edited = planet.edited,
+    pageNumber = planet.pageNumber.toLong(),
     description = planet.description,
     coverUrl = planet.coverUrl,
     astroInfoId = astroInfoId,

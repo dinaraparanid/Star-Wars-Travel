@@ -6,7 +6,6 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
 import androidx.paging.map
-import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
 import com.paranid5.star_wars_travel.data.PlanetsRepository
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
 import com.paranid5.star_wars_travel.impl.presentation.mainRegion
@@ -18,10 +17,6 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 
 class PlanetsViewModel(private val planetsRepository: PlanetsRepository) : ViewModel() {
-    private val planetsPagesState by lazy {
-        MutableStateFlow(emptyMap<Int, List<String>>())
-    }
-
     private val _searchTextState by lazy {
         MutableStateFlow("")
     }
@@ -84,20 +79,6 @@ class PlanetsViewModel(private val planetsRepository: PlanetsRepository) : ViewM
                 .to(regs)
         }.mapLatest { (allRegs, selectRegs) ->
             allRegs.map { it to (it in selectRegs) }
-        }
-    }
-
-    suspend fun fetchAndStorePlanets(pageNum: Int = 1) {
-        val planets = planetsRepository
-            .fetchPlanetPage(pageNum)
-            .planets
-
-        planetsPagesState.update {
-            it + mapOf(pageNum to planets.map(WookiepediaPlanet::title))
-        }
-
-        planets.forEach {
-            planetsRepository.addPlanetAsync(it)
         }
     }
 }
