@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Star Wars Travel</string>
     <string name="planets">Planets</string>
     <string name="settings">Settings</string>
     <string name="about_app">About App</string>
@@ -51,4 +52,10 @@
     <string name="major_cities">Major cities</string>
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="developer">Developer</string>
+    <string name="available_on_github">Available on GitHub</string>
+    <string name="app_description_1">Explore the Galaxy with Star Wars Travel!</string>
+    <string name="app_description_2">
+        Star Wars Travel is a sample Android application that utilises multiple services to preview the most historically important planets from Star Wars universe.
+        App is aimed to provide crucial information for travelers, explorers and SW fans.</string>
 </resources>
