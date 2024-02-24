@@ -1,6 +1,7 @@
 package com.paranid5.star_wars_travel.data.ktor.wookiepedia
 
 import com.paranid5.star_wars_travel.core.common.domain.entities.SwapiPlanet
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.Interest
 import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.PhysicalInformation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -16,7 +17,7 @@ internal suspend inline fun Element.physicalInfo(planet: SwapiPlanet) =
             diameter = planet.diameter.toIntOrNull() ?: 0,
             planetClass = info("class").firstOrNull(),
             atmosphere = info("atmosphere").firstOrNull(),
-            interest = info("interest"),
+            interest = info("interest").map { Interest(it, null) },
             flora = info("flora"),
             fauna = info("fauna")
         )

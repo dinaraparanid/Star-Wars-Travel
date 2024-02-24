@@ -2,6 +2,7 @@ package com.paranid5.star_wars_travel.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.Interest
 import com.paranid5.star_wars_travel.data.ktor.PlanetsNetSource
 import com.paranid5.star_wars_travel.data.paging.PlanetPagingSource
 import com.paranid5.star_wars_travel.data.sqldelight.PlanetsDbSource
@@ -19,4 +20,7 @@ class PlanetsRepository(
                 PlanetPagingSource(netSource, dbSource)
             }
         ).flow
+
+    fun updateInterestsAsync(interests: List<Interest>) =
+        dbSource.updateInterestsAsync(interests)
 }

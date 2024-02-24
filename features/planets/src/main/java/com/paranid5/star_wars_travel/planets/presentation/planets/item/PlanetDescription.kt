@@ -19,7 +19,8 @@ fun PlanetDescription(planet: PlanetUiState, modifier: Modifier = Modifier) =
         Spacer(Modifier.height(4.dp))
 
         PlanetInfoLabel(
-            info = planet.mainRegion ?: stringResource(R.string.secret_location),
+            info = planet.mainRegion
+                ?: stringResource(R.string.secret_location),
         )
 
         Spacer(Modifier.height(2.dp))

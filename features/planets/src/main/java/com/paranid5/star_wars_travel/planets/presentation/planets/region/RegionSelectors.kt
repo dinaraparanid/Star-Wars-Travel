@@ -47,8 +47,6 @@ fun RegionSelectors(
                     )
                 }
             }
-
-            Spacer(Modifier.width(4.dp))
         }
     }
 }

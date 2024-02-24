@@ -14,7 +14,8 @@ import com.paranid5.star_wars_travel.navigation.component.RootComponentChild
 import com.paranid5.star_wars_travel.planets.presentation.planet.PlanetScreen
 import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsScreen
 import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsViewModel
-import com.paranid5.star_wars_travel.presentation.composition_locals.LocalNavigator
+import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigator
+import com.paranid5.star_wars_travel.planets.presentation.planet.PlanetViewModel
 import com.paranid5.star_wars_travel.settings.presentation.SettingsScreen
 import org.koin.androidx.compose.koinViewModel
 
@@ -23,6 +24,7 @@ fun ContentScreen(
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
     planetsViewModel: PlanetsViewModel = koinViewModel(),
+    planetViewModel: PlanetViewModel = koinViewModel(),
 ) {
     val navigator = LocalNavigator.current!!
 
@@ -30,34 +32,46 @@ fun ContentScreen(
         stack = navigator.stack,
         animation = stackAnimation(fade()),
         modifier = modifier.padding(
-            top = paddingValues.calculateTopPadding(),
+            top = 0.dp,
             bottom = paddingValues.calculateBottomPadding()
         )
     ) {
-        when (it.instance) {
+        when (val child = it.instance) {
             is RootComponentChild.PlanetsChild -> PlanetsScreen(
                 planetsViewModel = planetsViewModel,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
+                    .padding(
+                        top = paddingValues.calculateTopPadding() + 8.dp,
+                        start = 16.dp,
+                        end = 16.dp
+                    )
             )
 
             is RootComponentChild.PlanetChild -> PlanetScreen(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 8.dp, start = 8.dp, end = 8.dp)
+                planet = child.component.planet,
+                viewModel = planetViewModel,
+                modifier = Modifier.fillMaxSize()
             )
 
             is RootComponentChild.AboutAppChild -> AboutAppScreen(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 8.dp, start = 8.dp, end = 8.dp)
+                    .padding(
+                        top = paddingValues.calculateTopPadding() + 8.dp,
+                        start = 8.dp,
+                        end = 8.dp
+                    )
             )
 
             is RootComponentChild.SettingsChild -> SettingsScreen(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 8.dp, start = 8.dp, end = 8.dp)
+                    .padding(
+                        top = paddingValues.calculateTopPadding() + 8.dp,
+                        start = 8.dp,
+                        end = 8.dp
+                    )
             )
         }
     }

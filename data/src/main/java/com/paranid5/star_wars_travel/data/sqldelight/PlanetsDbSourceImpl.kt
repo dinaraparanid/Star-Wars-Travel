@@ -4,6 +4,7 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
 import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.AstrographicalInformation
+import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.Interest
 import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.PhysicalInformation
 import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.SocietalInformation
 import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
@@ -53,6 +54,19 @@ internal class PlanetsDbSourceImpl(driver: SqlDriver) :
         launch(Dispatchers.IO) {
             mutex.withLock { queries.addPlanet(planet) }
         }
+
+    override fun updateInterestsAsync(interests: List<Interest>): Job =
+        launch(Dispatchers.IO) {
+            runCatching {
+                mutex.withLock {
+                    queries.transaction {
+                        interests.forEach {
+                            queries.updateInterest(it.coverUrl, it.value)
+                        }
+                    }
+                }
+            }
+        }
 }
 
 internal fun PlanetsQueries.parsePlanet(item: SelectBaseItems) =
@@ -93,7 +107,9 @@ internal fun PlanetsQueries.parsePhysicalInfo(item: SelectBaseItems) =
         atmosphere = item.atmosphere,
         interest = selectInterests(physInfoId = item.physInfoId)
             .executeAsList()
-            .mapNotNull { it.interest },
+            .mapNotNull { (interest, coverUrl) ->
+                interest?.let { Interest(it, coverUrl) }
+            },
         flora = selectFlora(physInfoId = item.physInfoId)
             .executeAsList()
             .mapNotNull { it.flora },
@@ -188,18 +204,18 @@ internal fun PlanetsQueries.addPlanet(planet: WookiepediaPlanet) = runCatching {
         val physInfoId = insertPhysInfo(planet.physicalInformation)
 
         planet.physicalInformation.interest.forEach {
-            insertInterest(it)
-            insertPhysInfoInterest(physInfoId, it)
+            insertInterest(it.value, it.coverUrl)
+            insertPhysInfoInterest(physInfoId = physInfoId, interest = it.value)
         }
 
         planet.physicalInformation.flora.forEach {
-            insertInterest(it)
-            insertPhysInfoInterest(physInfoId, it)
+            insertFlora(it)
+            insertFlora(it)
         }
 
         planet.physicalInformation.fauna.forEach {
-            insertInterest(it)
-            insertPhysInfoInterest(physInfoId, it)
+            insertFauna(it)
+            insertFauna(it)
         }
 
         val socInfoId = insertSocInfo(planet.societalInformation)

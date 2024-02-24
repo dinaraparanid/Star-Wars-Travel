@@ -43,6 +43,7 @@ dependencies {
     api(project(":core:resources"))
     api(project(":core:impl"))
     api(project(":data"))
+    api(project(":navigation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -67,6 +68,9 @@ dependencies {
     implementation(libs.ktor.client.core)
 
     implementation(libs.koin.androidx.compose)
+
+    implementation(libs.decompose)
+    implementation(libs.decompose.extensions.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

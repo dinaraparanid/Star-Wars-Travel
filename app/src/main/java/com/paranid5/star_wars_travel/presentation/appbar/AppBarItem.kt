@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.paranid5.star_wars_travel.navigation.component.RootComponentChild
-import com.paranid5.star_wars_travel.presentation.composition_locals.LocalNavigator
+import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigator
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 
 @Composable

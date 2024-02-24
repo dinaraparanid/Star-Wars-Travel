@@ -31,7 +31,7 @@ internal fun PlanetItem(
         }
     )
 
-    Box(
+    ConstraintLayout(
         Modifier.constrainAs(description) {
             bottom.linkTo(parent.bottom, margin = 8.dp)
             start.linkTo(parent.start, margin = 8.dp)
@@ -39,14 +39,24 @@ internal fun PlanetItem(
             width = Dimension.fillToConstraints
         }
     ) {
+        val (desc, travel) = createRefs()
+
         PlanetDescription(
             planet = planet,
-            modifier = Modifier.align(Alignment.CenterStart)
+            modifier = Modifier.constrainAs(desc) {
+                centerVerticallyTo(parent)
+                start.linkTo(parent.start)
+                end.linkTo(travel.start, margin = 8.dp)
+                width = Dimension.fillToConstraints
+            }
         )
 
         TravelButton(
             planet = planet,
-            modifier = Modifier.align(Alignment.BottomEnd)
+            modifier = Modifier.constrainAs(travel) {
+                bottom.linkTo(parent.bottom)
+                end.linkTo(parent.end)
+            }
         )
     }
 }

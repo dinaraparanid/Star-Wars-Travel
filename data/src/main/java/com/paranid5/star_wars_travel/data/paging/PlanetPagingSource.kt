@@ -18,7 +18,7 @@ class PlanetPagingSource(
     override suspend fun load(params: LoadParams<Int>) = runCatching {
         val currentPage = params.key ?: 1
 
-        launch(Dispatchers.IO) {
+        val fetchedPlanetsTask = async(Dispatchers.IO) {
             netSource
                 .fetchCompletePlanetPage(currentPage)
                 .apply { planets.forEach { dbSource.addPlanetAsync(it) } }
@@ -37,7 +37,10 @@ class PlanetPagingSource(
         val pages = planetsRes.pagesSet()
 
         LoadResult.Page(
-            data = planets,
+            data = when {
+                planets.isEmpty() -> fetchedPlanetsTask.await().planets
+                else -> planets
+            },
             prevKey = when {
                 currentPage - 1 in pages -> currentPage - 1
                 else -> planetPageTask.await().next?.let { currentPage - 1 }

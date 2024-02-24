@@ -6,12 +6,12 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
+import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
 
 class RootNavigator(componentContext: ComponentContext) : ComponentContext by componentContext {
     private val navigation = StackNavigation<RootConfig>()
 
-    val stack: Value<ChildStack<*, RootComponentChild>> =
+    val stack: Value<ChildStack<RootConfig, RootComponentChild>> =
         childStack(
             source = navigation,
             serializer = RootConfig.serializer(),
@@ -21,9 +21,9 @@ class RootNavigator(componentContext: ComponentContext) : ComponentContext by co
         )
 
     fun navigateToPlanets() =
-        navigation.bringToFront(RootConfig.Planets)
+        navigation.bringToFront(previousPlanetsConfigOrDefault())
 
-    fun navigateToPlanet(planet: WookiepediaPlanet) =
+    fun navigateToPlanet(planet: PlanetUiState) =
         navigation.bringToFront(RootConfig.Planet(planet))
 
     fun navigateToSettings() =
@@ -43,7 +43,7 @@ class RootNavigator(componentContext: ComponentContext) : ComponentContext by co
     inline val planetsComponent
         get() = PlanetsComponent(this)
 
-    fun planetComponent(planet: WookiepediaPlanet) =
+    fun planetComponent(planet: PlanetUiState) =
         PlanetComponent(planet, this)
 
     inline val aboutAppComponent
@@ -59,4 +59,16 @@ class RootNavigator(componentContext: ComponentContext) : ComponentContext by co
             RootConfig.AboutApp -> RootComponentChild.AboutAppChild(aboutAppComponent)
             RootConfig.Settings -> RootComponentChild.SettingsChild(settingsComponent)
         }
+
+    private fun previousPlanetsConfigOrDefault() =
+        stack
+            .value
+            .backStack
+            .asReversed()
+            .firstOrNull {
+                it.instance is RootComponentChild.PlanetsChild
+                        || it.instance is RootComponentChild.PlanetChild
+            }
+            ?.configuration
+            ?: RootConfig.Planets
 }

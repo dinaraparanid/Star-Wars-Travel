@@ -15,15 +15,15 @@ private const val WOOKIEPEDIA_BASE_URL = "https://starwars.fandom.com/wiki"
 internal val CITATION_REGEX = Regex("\\[\\d+]")
 
 suspend fun PlanetDTO(planet: SwapiPlanet, pageNumber: Int) = coroutineScope {
-    val html = PlanetHtml(planet.name)
-    val shortDescription = html.shortDescription().getOrNull()
+    val html = WookieHtml(planet.name).getOrNull()
+    val shortDescription = html?.shortDescription()?.getOrNull()
 
     WookiepediaPlanet(
         title = planet.name,
         edited = planet.edited,
         pageNumber = pageNumber,
-        description = html.planetDescription().getOrNull(),
-        coverUrl = html.planetUrlCover().getOrNull(),
+        description = html?.planetDescription()?.getOrNull(),
+        coverUrl = html?.urlCover()?.getOrNull(),
         astrographicalInformation = shortDescription
             ?.astrographicalInfo(planet)
             ?: defaultAstroInfo(planet),
@@ -36,14 +36,16 @@ suspend fun PlanetDTO(planet: SwapiPlanet, pageNumber: Int) = coroutineScope {
     )
 }
 
-private suspend inline fun PlanetHtml(planet: String): Element =
+internal suspend inline fun WookieHtml(query: String) =
     withContext(Dispatchers.IO) {
-        Jsoup
-            .connect("$WOOKIEPEDIA_BASE_URL/${wookiepediaFormat(planet)}")
-            .ignoreContentType(true)
-            .userAgent(USER_AGENT)
-            .parser(Parser.xmlParser())
-            .get()
+        runCatching {
+            Jsoup
+                .connect("$WOOKIEPEDIA_BASE_URL/${wookiepediaFormat(query)}")
+                .ignoreContentType(true)
+                .userAgent(USER_AGENT)
+                .parser(Parser.xmlParser())
+                .get()
+        }
     }
 
 private suspend inline fun Element.planetDescription() = runCatching {
@@ -65,7 +67,7 @@ private suspend inline fun Element.shortDescription() = runCatching {
     }
 }
 
-private suspend inline fun Element.planetUrlCover() = runCatching {
+internal suspend inline fun Element.urlCover() = runCatching {
     withContext(Dispatchers.IO) {
         select("meta[property=og:image]")
             .attr("content")

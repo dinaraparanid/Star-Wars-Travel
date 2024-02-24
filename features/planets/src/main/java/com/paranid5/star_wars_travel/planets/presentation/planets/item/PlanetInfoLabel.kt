@@ -15,7 +15,7 @@ import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 fun PlanetInfoLabel(
     info: String,
     modifier: Modifier = Modifier,
-    maxLines: Int = Int.MAX_VALUE,
+    maxLines: Int = 1,
     overflow: TextOverflow = TextOverflow.Ellipsis
 ) {
     val colors = LocalAppColors.current
