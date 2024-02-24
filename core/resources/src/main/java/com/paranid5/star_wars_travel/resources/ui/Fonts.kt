@@ -5,6 +5,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.paranid5.star_wars_travel.resources.R
 
-val starJediFont = FontFamily(
+val StarJediFont = FontFamily(
     Font(R.font.starjedi, FontWeight.Normal)
 )

@@ -13,11 +13,11 @@ suspend fun HttpClient.getPlanets(pageNumber: Int = 1) =
             SwapiPlanetPage(0, null, null, emptyList())
         }
         .let { (_, next, previous, results) ->
-        PlanetPage(
-            next = next,
-            previous = previous,
-            planets = results
-                .map { PlanetDTO(planet = it, pageNumber = pageNumber) }
-                .sortedBy(WookiepediaPlanet::edited)
-        )
-    }
+            PlanetPage(
+                next = next,
+                previous = previous,
+                planets = results
+                    .map { PlanetDTO(planet = it, pageNumber = pageNumber) }
+                    .sortedBy(WookiepediaPlanet::edited)
+            )
+        }

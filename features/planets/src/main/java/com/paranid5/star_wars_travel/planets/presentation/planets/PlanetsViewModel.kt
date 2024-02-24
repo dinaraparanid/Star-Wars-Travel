@@ -90,4 +90,4 @@ fun PagingData<PlanetUiState>.filterByRegions(regions: List<String?>) =
     }
 
 fun PagingData<PlanetUiState>.filterBySearchQuery(searchText: String) =
-    filter { searchText in it.title.lowercase() }
+    filter { searchText.lowercase() in it.title.lowercase() }

@@ -79,8 +79,7 @@ fun PlanetScreen(
     )
 
     Description(
-        planetDescription = planet.description
-            ?: stringResource(R.string.no_description),
+        planetDescription = planet.description ?: stringResource(R.string.no_description),
         modifier = Modifier.constrainAs(description) {
             top.linkTo(interests.bottom, margin = 16.dp)
             start.linkTo(parent.start, margin = 16.dp)

@@ -55,7 +55,7 @@ fun PlanetsSearchBar(
             .clip(RoundedCornerShape(24.dp))
             .border(
                 width = 1.dp,
-                color = Color.White.copy(alpha = 0.15F),
+                color = colors.transparentUtility,
                 shape = RoundedCornerShape(24.dp)
             ),
         decorationBox = {

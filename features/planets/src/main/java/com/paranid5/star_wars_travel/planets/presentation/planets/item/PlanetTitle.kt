@@ -8,7 +8,7 @@ import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.paranid5.star_wars_travel.resources.ui.starJediFont
+import com.paranid5.star_wars_travel.resources.ui.StarJediFont
 
 @Composable
 fun PlanetTitle(
@@ -20,7 +20,7 @@ fun PlanetTitle(
     modifier = modifier,
     color = Color.White,
     fontSize = fontSize,
-    fontFamily = starJediFont,
+    fontFamily = StarJediFont,
     style = TextStyle(
         platformStyle = PlatformTextStyle(
             includeFontPadding = false

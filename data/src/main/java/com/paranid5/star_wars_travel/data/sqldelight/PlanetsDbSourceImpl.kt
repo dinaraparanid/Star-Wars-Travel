@@ -8,6 +8,7 @@ import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.Int
 import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.PhysicalInformation
 import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.SocietalInformation
 import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
+import com.paranid5.star_wars_travel.core.common.domain.utils.toIntOrZero
 import com.paranid5.star_wars_travel.data.Planets
 import com.paranid5.starwarstravel.data.PlanetsQueries
 import com.paranid5.starwarstravel.data.SelectBaseItems
@@ -101,7 +102,7 @@ internal fun PlanetsQueries.parsePhysicalInfo(item: SelectBaseItems) =
         climate = item.climate,
         gravity = item.gravity,
         terrain = item.terrain,
-        surfaceWater = item.surface.toIntOrNull() ?: 0,
+        surfaceWater = item.surface.toIntOrZero(),
         diameter = item.diameter.toInt(),
         planetClass = item.planetClass,
         atmosphere = item.atmosphere,
