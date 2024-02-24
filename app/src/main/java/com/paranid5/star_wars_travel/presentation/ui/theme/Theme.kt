@@ -1,11 +1,11 @@
 package com.paranid5.star_wars_travel.presentation.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import com.paranid5.star_wars_travel.core.common.presentation.Theme
 import com.paranid5.star_wars_travel.resources.ui.AppColors
 import com.paranid5.star_wars_travel.resources.ui.DarkColorScheme
 import com.paranid5.star_wars_travel.resources.ui.LightColorScheme
@@ -16,10 +16,15 @@ import org.koin.compose.KoinContext
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun StarWarsTravelTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    theme: Theme,
     content: @Composable () -> Unit
 ) {
-    val appColors = AppColors(if (darkTheme) DarkColorScheme else LightColorScheme)
+    val appColors = AppColors(
+        when (theme) {
+            Theme.LIGHT -> LightColorScheme
+            Theme.DARK -> DarkColorScheme
+        }
+    )
 
     KoinContext {
         MaterialTheme(

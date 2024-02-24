@@ -11,7 +11,8 @@ val DarkColorScheme = darkColorScheme(
     secondary = PurpleGrey80,
     tertiary = Pink80,
     background = Color.DarkGray,
-    onBackground = Color.White
+    onBackground = Color.White,
+    onSurface = TransparentUtilityDark
 )
 
 val LightColorScheme = lightColorScheme(
@@ -19,17 +20,8 @@ val LightColorScheme = lightColorScheme(
     secondary = PurpleGrey40,
     tertiary = Pink40,
     background = Color.LightGray,
-    onBackground = Color.Black
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    onBackground = Color.Black,
+    onSurface = TransparentUtilityLight
 )
 
 @JvmInline
@@ -45,6 +37,9 @@ value class AppColors(val colorScheme: ColorScheme = DarkColorScheme) {
 
     val onBackground
         get() = colorScheme.onBackground
+
+    val transparentUtility
+        get() = colorScheme.onSurface
 }
 
 val LocalAppColors = staticCompositionLocalOf { AppColors() }

@@ -49,4 +49,6 @@
     <string name="government">Government</string>
     <string name="population">Population</string>
     <string name="major_cities">Major cities</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

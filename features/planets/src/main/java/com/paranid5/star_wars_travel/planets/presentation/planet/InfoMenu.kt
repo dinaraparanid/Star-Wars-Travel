@@ -25,7 +25,7 @@ import com.paranid5.star_wars_travel.impl.presentation.SocInfo
 import com.paranid5.star_wars_travel.planets.presentation.HeaderText
 import com.paranid5.star_wars_travel.planets.presentation.LabelList
 import com.paranid5.star_wars_travel.resources.R
-import com.paranid5.star_wars_travel.resources.ui.TransparentUtility
+import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 import kotlinx.collections.immutable.persistentListOf
 
 typealias InfoItems = List<Pair<String, List<String>>>
@@ -36,6 +36,8 @@ fun InfoMenu(
     items: InfoItems,
     modifier: Modifier = Modifier
 ) {
+    val colors = LocalAppColors.current
+
     var isMenuShown by remember {
         mutableStateOf(true)
     }
@@ -63,7 +65,7 @@ fun InfoMenu(
                     else -> R.string.show
                 }
             ),
-            color = TransparentUtility,
+            color = colors.transparentUtility,
             fontSize = 10.sp,
             modifier = Modifier.clickable {
                 isMenuShown = !isMenuShown

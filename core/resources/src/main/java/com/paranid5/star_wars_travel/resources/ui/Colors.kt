@@ -12,4 +12,7 @@ val Pink40 = Color(0xFF7D5260)
 
 val StarWarsYellow = Color(0xFFFFE81F)
 
-val TransparentUtility = Color.White.copy(alpha = 0.25F)
+val TransparentUtilityDark = Color.White.copy(alpha = 0.25F)
+val TransparentUtilityLight = Color.Black.copy(alpha = 0.2F)
+
+val AppBarColor = Color(0xFF2A2A2A)

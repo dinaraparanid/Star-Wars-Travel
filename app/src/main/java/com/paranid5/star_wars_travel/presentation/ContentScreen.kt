@@ -17,6 +17,7 @@ import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsViewMod
 import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigator
 import com.paranid5.star_wars_travel.planets.presentation.planet.PlanetViewModel
 import com.paranid5.star_wars_travel.settings.presentation.SettingsScreen
+import com.paranid5.star_wars_travel.settings.presentation.SettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -25,6 +26,7 @@ fun ContentScreen(
     modifier: Modifier = Modifier,
     planetsViewModel: PlanetsViewModel = koinViewModel(),
     planetViewModel: PlanetViewModel = koinViewModel(),
+    settingsViewModel: SettingsViewModel = koinViewModel(),
 ) {
     val navigator = LocalNavigator.current!!
 
@@ -65,6 +67,7 @@ fun ContentScreen(
             )
 
             is RootComponentChild.SettingsChild -> SettingsScreen(
+                settingsViewModel = settingsViewModel,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(

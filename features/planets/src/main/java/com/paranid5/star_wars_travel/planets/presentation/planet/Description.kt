@@ -1,7 +1,6 @@
 package com.paranid5.star_wars_travel.planets.presentation.planet
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,7 +23,6 @@ import androidx.compose.ui.unit.sp
 import com.paranid5.star_wars_travel.planets.presentation.HeaderText
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
-import com.paranid5.star_wars_travel.resources.ui.TransparentUtility
 
 @Composable
 fun Description(
@@ -82,7 +80,7 @@ fun Description(
                         else -> R.string.show
                     }
                 ),
-                color = TransparentUtility,
+                color = colors.transparentUtility,
                 fontSize = 10.sp,
                 modifier = Modifier.clickable {
                     isDescriptionShown = !isDescriptionShown

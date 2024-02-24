@@ -1,12 +1,12 @@
 package com.paranid5.star_wars_travel.planets.presentation.planets.region
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -21,6 +21,10 @@ fun RegionSelectors(
         .regionsFlow
         .collectAsLazyPagingItems()
 
+    val shownRegions by remember {
+        derivedStateOf { regions.itemSnapshotList.distinct() }
+    }
+
     val selectedRegs by viewModel
         .selectedRegionsState
         .collectAsState()
@@ -29,7 +33,7 @@ fun RegionSelectors(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(regions.itemCount + 1) { i ->
+        items(shownRegions.size + 1) { i ->
             when (i) {
                 0 -> RegionSelector(
                     region = null,
@@ -38,7 +42,7 @@ fun RegionSelectors(
                 )
 
                 else -> {
-                    val (region, isSelected) = regions[i - 1]!!
+                    val (region, isSelected) = shownRegions[i - 1]!!
 
                     RegionSelector(
                         region = region,

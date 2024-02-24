@@ -11,10 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.paranid5.star_wars_travel.planets.presentation.planet.InfoItems
-import com.paranid5.star_wars_travel.resources.ui.TransparentUtility
+import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun LabelList(items: InfoItems, modifier: Modifier = Modifier) =
+fun LabelList(items: InfoItems, modifier: Modifier = Modifier) {
+    val colors = LocalAppColors.current
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -38,8 +40,9 @@ fun LabelList(items: InfoItems, modifier: Modifier = Modifier) =
                         Modifier
                             .fillMaxWidth()
                             .height(1.dp)
-                            .background(TransparentUtility)
+                            .background(colors.transparentUtility)
                     )
             }
         }
     }
+}
