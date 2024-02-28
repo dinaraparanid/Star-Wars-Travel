@@ -5,20 +5,15 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.paranid5.star_wars_travel.navigation.component.RootComponentChild
-import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigator
+import com.paranid5.star_wars_travel.navigation.component.RootConfig
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.AppBarColor
-import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun AppBar(modifier: Modifier = Modifier) {
-    val navigator = LocalNavigator.current!!
-
+fun AppBar(modifier: Modifier = Modifier) =
     BottomAppBar(
         containerColor = AppBarColor,
         modifier = modifier
@@ -27,22 +22,21 @@ fun AppBar(modifier: Modifier = Modifier) {
         AppBarItem(
             title = stringResource(R.string.planets),
             image = painterResource(R.drawable.planet),
-            screen = RootComponentChild.PlanetsChild(navigator.planetsComponent),
+            screen = RootConfig.Planets,
             modifier = Modifier.weight(1F)
         )
 
         AppBarItem(
             title = stringResource(R.string.settings),
             image = painterResource(R.drawable.settings),
-            screen = RootComponentChild.SettingsChild(navigator.settingsComponent),
+            screen = RootConfig.Settings,
             modifier = Modifier.weight(1F)
         )
 
         AppBarItem(
             title = stringResource(R.string.about_app),
             image = painterResource(R.drawable.question),
-            screen = RootComponentChild.AboutAppChild(navigator.aboutAppComponent),
+            screen = RootConfig.AboutApp,
             modifier = Modifier.weight(1F)
         )
     }
-}

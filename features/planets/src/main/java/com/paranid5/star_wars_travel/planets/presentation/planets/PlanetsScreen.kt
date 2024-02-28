@@ -8,11 +8,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
 import com.paranid5.star_wars_travel.planets.presentation.planets.region.RegionSelectors
 
 @Composable
 fun PlanetsScreen(
-    planetsViewModel: PlanetsViewModel,
+    planetsComponent: PlanetsComponent,
     modifier: Modifier = Modifier
 ) = Column(modifier) {
     PlanetsWelcomeLabel(
@@ -24,18 +25,18 @@ fun PlanetsScreen(
     Spacer(Modifier.height(16.dp))
 
     PlanetsSearchBar(
-        viewModel = planetsViewModel,
+        planetsComponent = planetsComponent,
         modifier = Modifier.fillMaxWidth()
     )
 
     Spacer(Modifier.height(16.dp))
 
-    RegionSelectors(viewModel = planetsViewModel)
+    RegionSelectors(planetsComponent = planetsComponent)
 
     Spacer(Modifier.height(16.dp))
 
     PlanetList(
-        viewModel = planetsViewModel,
+        planetsComponent = planetsComponent,
         modifier = Modifier.fillMaxWidth()
     )
 }

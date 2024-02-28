@@ -11,22 +11,15 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import com.paranid5.star_wars_travel.about_app.presentation.AboutAppScreen
 import com.paranid5.star_wars_travel.navigation.component.RootComponentChild
+import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigator
 import com.paranid5.star_wars_travel.planets.presentation.planet.PlanetScreen
 import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsScreen
-import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsViewModel
-import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigator
-import com.paranid5.star_wars_travel.planets.presentation.planet.PlanetViewModel
 import com.paranid5.star_wars_travel.settings.presentation.SettingsScreen
-import com.paranid5.star_wars_travel.settings.presentation.SettingsViewModel
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ContentScreen(
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
-    planetsViewModel: PlanetsViewModel = koinViewModel(),
-    planetViewModel: PlanetViewModel = koinViewModel(),
-    settingsViewModel: SettingsViewModel = koinViewModel(),
 ) {
     val navigator = LocalNavigator.current!!
 
@@ -40,7 +33,7 @@ fun ContentScreen(
     ) {
         when (val child = it.instance) {
             is RootComponentChild.PlanetsChild -> PlanetsScreen(
-                planetsViewModel = planetsViewModel,
+                planetsComponent = child.component,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
@@ -52,7 +45,7 @@ fun ContentScreen(
 
             is RootComponentChild.PlanetChild -> PlanetScreen(
                 planet = child.component.planet,
-                viewModel = planetViewModel,
+                planetComponent = child.component,
                 modifier = Modifier.fillMaxSize()
             )
 
@@ -67,7 +60,7 @@ fun ContentScreen(
             )
 
             is RootComponentChild.SettingsChild -> SettingsScreen(
-                settingsViewModel = settingsViewModel,
+                settingsComponent = child.component,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(

@@ -9,15 +9,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.paranid5.star_wars_travel.navigation.component.SettingsComponent
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
 fun SettingsScreen(
-    settingsViewModel: SettingsViewModel,
+    settingsComponent: SettingsComponent,
     modifier: Modifier = Modifier
 ) = Column(modifier) {
     ThemeMenu(
-        viewModel = settingsViewModel,
+        settingsComponent = settingsComponent,
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 32.dp, bottom = 4.dp)

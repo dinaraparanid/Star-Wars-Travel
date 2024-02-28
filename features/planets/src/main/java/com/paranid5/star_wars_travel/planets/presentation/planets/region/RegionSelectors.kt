@@ -10,14 +10,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsViewModel
+import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
 
 @Composable
 fun RegionSelectors(
-    viewModel: PlanetsViewModel,
+    planetsComponent: PlanetsComponent,
     modifier: Modifier = Modifier
 ) {
-    val regions = viewModel
+    val regions = planetsComponent
         .regionsFlow
         .collectAsLazyPagingItems()
 
@@ -25,7 +25,7 @@ fun RegionSelectors(
         derivedStateOf { regions.itemSnapshotList.distinct() }
     }
 
-    val selectedRegs by viewModel
+    val selectedRegs by planetsComponent
         .selectedRegionsState
         .collectAsState()
 
@@ -38,7 +38,7 @@ fun RegionSelectors(
                 0 -> RegionSelector(
                     region = null,
                     isSelected = null in selectedRegs,
-                    viewModel = viewModel
+                    planetsComponent = planetsComponent
                 )
 
                 else -> {
@@ -47,7 +47,7 @@ fun RegionSelectors(
                     RegionSelector(
                         region = region,
                         isSelected = isSelected,
-                        viewModel = viewModel
+                        planetsComponent = planetsComponent
                     )
                 }
             }

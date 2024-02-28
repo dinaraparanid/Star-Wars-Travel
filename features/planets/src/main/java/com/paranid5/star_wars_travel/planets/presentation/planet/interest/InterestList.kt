@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.paranid5.star_wars_travel.data.ktor.wookiepedia.loadInterestCover
 import com.paranid5.star_wars_travel.impl.presentation.Interest
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
-import com.paranid5.star_wars_travel.planets.presentation.planet.PlanetViewModel
+import com.paranid5.star_wars_travel.navigation.component.PlanetComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,7 +25,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun InterestList(
     planet: PlanetUiState,
-    viewModel: PlanetViewModel,
+    planetComponent: PlanetComponent,
     modifier: Modifier = Modifier
 ) {
     var loadedPlanet by remember(planet) {
@@ -40,7 +40,7 @@ fun InterestList(
                 .map { Interest(it.value, loadInterestCover(it.value)) }
         }
 
-        launch(Dispatchers.IO) { viewModel.updateInterestsAsync(interests) }
+        launch(Dispatchers.IO) { planetComponent.updateInterestsAsync(interests) }
 
         loadedPlanet = planet.copy(
             physicalInformation = planet.physicalInformation.copy(

@@ -13,6 +13,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
+import com.paranid5.star_wars_travel.navigation.component.PlanetComponent
 import com.paranid5.star_wars_travel.planets.presentation.planet.interest.InterestList
 import com.paranid5.star_wars_travel.planets.presentation.planets.item.PlanetCover
 import com.paranid5.star_wars_travel.planets.presentation.planets.item.PlanetTitle
@@ -21,7 +22,7 @@ import com.paranid5.star_wars_travel.planets.presentation.planets.item.TravelBut
 @Composable
 fun PlanetScreen(
     planet: PlanetUiState,
-    viewModel: PlanetViewModel,
+    planetComponent: PlanetComponent,
     modifier: Modifier = Modifier
 ) = ConstraintLayout(modifier.verticalScroll(rememberScrollState())) {
     val (
@@ -71,7 +72,7 @@ fun PlanetScreen(
 
     InterestList(
         planet = planet,
-        viewModel = viewModel,
+        planetComponent = planetComponent,
         modifier = Modifier.constrainAs(interests) {
             top.linkTo(travelButton.bottom, margin = 16.dp)
             start.linkTo(parent.start, margin = 16.dp)

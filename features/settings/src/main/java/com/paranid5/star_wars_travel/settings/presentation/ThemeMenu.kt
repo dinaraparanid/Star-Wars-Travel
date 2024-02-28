@@ -20,27 +20,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.paranid5.star_wars_travel.core.common.presentation.Theme
+import com.paranid5.star_wars_travel.navigation.component.SettingsComponent
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
 fun ThemeMenu(
-    viewModel: SettingsViewModel,
+    settingsComponent: SettingsComponent,
     modifier: Modifier = Modifier
 ) {
-    val theme by viewModel.themeState.collectAsState()
+    val theme by settingsComponent.themeState.collectAsState()
 
     when (theme) {
         Theme.LIGHT -> ThemeMenuImpl(
             iconPainter = painterResource(R.drawable.light_mode),
             text = stringResource(R.string.light_mode),
-            modifier = modifier.clickable { viewModel.resetTheme() }
+            modifier = modifier.clickable { settingsComponent.resetTheme() }
         )
 
         Theme.DARK -> ThemeMenuImpl(
             iconPainter = painterResource(R.drawable.dark_mode),
             text = stringResource(R.string.dark_mode),
-            modifier = modifier.clickable { viewModel.resetTheme() }
+            modifier = modifier.clickable { settingsComponent.resetTheme() }
         )
     }
 }

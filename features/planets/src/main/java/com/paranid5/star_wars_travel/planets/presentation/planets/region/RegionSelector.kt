@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsViewModel
+import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 
@@ -25,7 +25,7 @@ import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 fun RegionSelector(
     region: String?,
     isSelected: Boolean,
-    viewModel: PlanetsViewModel,
+    planetsComponent: PlanetsComponent,
     modifier: Modifier = Modifier
 ) {
     val allItem = stringResource(R.string.all)
@@ -45,7 +45,7 @@ fun RegionSelector(
         ),
         modifier = modifier
             .widthIn(min = 60.dp)
-            .clickable { viewModel.reselectRegion(region) },
+            .clickable { planetsComponent.reselectRegion(region) },
     ) {
         Text(
             text = region ?: allItem,

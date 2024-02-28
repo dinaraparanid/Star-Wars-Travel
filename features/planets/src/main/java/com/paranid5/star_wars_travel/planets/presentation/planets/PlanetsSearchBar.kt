@@ -28,25 +28,26 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 
 @Composable
 fun PlanetsSearchBar(
-    viewModel: PlanetsViewModel,
+    planetsComponent: PlanetsComponent,
     modifier: Modifier = Modifier
 ) {
     val colors = LocalAppColors.current
 
-    val searchText by viewModel
+    val searchText by planetsComponent
         .searchTextState
         .collectAsState()
 
     BasicTextField(
         value = searchText,
         singleLine = true,
-        onValueChange = viewModel::setSearchText,
+        onValueChange = planetsComponent::setSearchText,
         textStyle = TextStyle(
             color = colors.onBackground,
             fontSize = 14.sp
@@ -61,7 +62,7 @@ fun PlanetsSearchBar(
         decorationBox = {
             SearchDecorBox(
                 innerTextField = it,
-                viewModel = viewModel
+                planetsComponent = planetsComponent
             )
         }
     )
@@ -71,11 +72,11 @@ fun PlanetsSearchBar(
 @Composable
 private fun SearchDecorBox(
     innerTextField: @Composable () -> Unit,
-    viewModel: PlanetsViewModel
+    planetsComponent: PlanetsComponent
 ) {
     val colors = LocalAppColors.current
 
-    val searchText by viewModel
+    val searchText by planetsComponent
         .searchTextState
         .collectAsState()
 
@@ -92,7 +93,7 @@ private fun SearchDecorBox(
         prefix = { SearchIcon() },
         suffix = {
             CancelIcon(
-                viewModel = viewModel,
+                planetsComponent = planetsComponent,
                 isFocused = isFocused,
                 modifier = Modifier.size(20.dp)
             )
@@ -127,13 +128,13 @@ private fun SearchIcon(modifier: Modifier = Modifier) {
 
 @Composable
 private fun CancelIcon(
-    viewModel: PlanetsViewModel,
+    planetsComponent: PlanetsComponent,
     isFocused: Boolean,
     modifier: Modifier = Modifier
 ) {
     val colors = LocalAppColors.current
 
-    val searchText by viewModel
+    val searchText by planetsComponent
         .searchTextState
         .collectAsState()
 
@@ -149,10 +150,9 @@ private fun CancelIcon(
         painter = painterResource(R.drawable.cross),
         contentDescription = stringResource(R.string.cancel_search),
         tint = iconColor,
-        modifier = modifier
-            .clickable(enabled = isIconActive) {
-                viewModel.setSearchText("")
-            }
+        modifier = modifier.clickable(enabled = isIconActive) {
+            planetsComponent.setSearchText("")
+        }
     )
 }
 

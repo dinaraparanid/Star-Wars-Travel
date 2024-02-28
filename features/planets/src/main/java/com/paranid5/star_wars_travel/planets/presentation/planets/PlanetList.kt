@@ -10,17 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
 import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigator
 import com.paranid5.star_wars_travel.planets.presentation.planets.item.PlanetItem
 
 @Composable
 fun PlanetList(
-    viewModel: PlanetsViewModel,
+    planetsComponent: PlanetsComponent,
     modifier: Modifier = Modifier
 ) {
     val navigator = LocalNavigator.current!!
 
-    val planets = viewModel
+    val planets = planetsComponent
         .planetsFlow
         .collectAsLazyPagingItems()
 

@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.paranid5.star_wars_travel.navigation.component.RootComponentChild
+import com.paranid5.star_wars_travel.navigation.component.RootConfig
 import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigator
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 
@@ -25,7 +25,7 @@ import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 fun AppBarItem(
     title: String,
     image: ImageVector,
-    screen: RootComponentChild,
+    screen: RootConfig,
     modifier: Modifier = Modifier
 ) = AppBarItemImpl(
     screen = screen,
@@ -37,7 +37,7 @@ fun AppBarItem(
 fun AppBarItem(
     title: String,
     image: Painter,
-    screen: RootComponentChild,
+    screen: RootConfig,
     modifier: Modifier = Modifier
 ) = AppBarItemImpl(
     screen = screen,
@@ -95,7 +95,7 @@ private fun AppBarIcon(
 
 @Composable
 private fun AppBarItemImpl(
-    screen: RootComponentChild,
+    screen: RootConfig,
     icon: @Composable () -> Unit,
     modifier: Modifier = Modifier
 ) {

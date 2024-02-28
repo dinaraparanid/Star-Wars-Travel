@@ -41,6 +41,7 @@ android {
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:resources"))
+    implementation(project(":navigation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -54,7 +55,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.material)
 
-    implementation(libs.koin.androidx.compose)
+    implementation(libs.decompose)
+    implementation(libs.decompose.extensions.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

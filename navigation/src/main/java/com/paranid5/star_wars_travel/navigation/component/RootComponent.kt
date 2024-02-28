@@ -6,9 +6,15 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
+import com.paranid5.star_wars_travel.core.common.presentation.ThemeProvider
+import com.paranid5.star_wars_travel.data.PlanetsRepository
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
 
-class RootNavigator(componentContext: ComponentContext) : ComponentContext by componentContext {
+class RootComponent(
+    componentContext: ComponentContext,
+    private val planetsRepository: PlanetsRepository,
+    private val themeProvider: ThemeProvider
+) : ComponentContext by componentContext {
     private val navigation = StackNavigation<RootConfig>()
 
     val stack: Value<ChildStack<RootConfig, RootComponentChild>> =
@@ -32,32 +38,31 @@ class RootNavigator(componentContext: ComponentContext) : ComponentContext by co
     fun navigateToAboutApp() =
         navigation.bringToFront(RootConfig.AboutApp)
 
-    infix fun navigateTo(screen: RootComponentChild) =
+    infix fun navigateTo(screen: RootConfig) =
         when (screen) {
-            is RootComponentChild.PlanetsChild -> navigateToPlanets()
-            is RootComponentChild.PlanetChild -> navigateToPlanet(screen.component.planet)
-            is RootComponentChild.SettingsChild -> navigateToSettings()
-            is RootComponentChild.AboutAppChild -> navigateToAboutApp()
+            RootConfig.Planets -> navigateToPlanets()
+            is RootConfig.Planet -> navigateToPlanet(screen.planet)
+            RootConfig.Settings -> navigateToSettings()
+            RootConfig.AboutApp -> navigateToAboutApp()
         }
-
-    inline val planetsComponent
-        get() = PlanetsComponent(this)
-
-    fun planetComponent(planet: PlanetUiState) =
-        PlanetComponent(planet, this)
-
-    inline val aboutAppComponent
-        get() = AboutAppComponent(this)
-
-    inline val settingsComponent
-        get() = SettingsComponent(this)
 
     private fun child(config: RootConfig, componentContext: ComponentContext) =
         when (config) {
-            RootConfig.Planets -> RootComponentChild.PlanetsChild(planetsComponent)
-            is RootConfig.Planet -> RootComponentChild.PlanetChild(planetComponent(config.planet))
-            RootConfig.AboutApp -> RootComponentChild.AboutAppChild(aboutAppComponent)
-            RootConfig.Settings -> RootComponentChild.SettingsChild(settingsComponent)
+            RootConfig.Planets -> RootComponentChild.PlanetsChild(
+                PlanetsComponent(planetsRepository, componentContext)
+            )
+
+            is RootConfig.Planet -> RootComponentChild.PlanetChild(
+                PlanetComponent(config.planet, planetsRepository, componentContext)
+            )
+
+            RootConfig.AboutApp -> RootComponentChild.AboutAppChild(
+                AboutAppComponent(componentContext)
+            )
+
+            RootConfig.Settings -> RootComponentChild.SettingsChild(
+                SettingsComponent(themeProvider, componentContext)
+            )
         }
 
     private fun previousPlanetsConfigOrDefault() =

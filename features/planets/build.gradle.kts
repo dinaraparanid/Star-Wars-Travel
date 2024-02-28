@@ -67,8 +67,6 @@ dependencies {
 
     implementation(libs.ktor.client.core)
 
-    implementation(libs.koin.androidx.compose)
-
     implementation(libs.decompose)
     implementation(libs.decompose.extensions.compose)
 

@@ -1,6 +1,5 @@
 package com.paranid5.star_wars_travel.navigation.component
 
-import com.paranid5.star_wars_travel.core.common.domain.entities.wookiepedia.WookiepediaPlanet
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
 import kotlinx.serialization.Serializable
 
