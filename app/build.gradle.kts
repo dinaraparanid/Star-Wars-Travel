@@ -71,6 +71,8 @@ dependencies {
     implementation(libs.decompose.extensions.compose)
 
     implementation(libs.koin.androidx.compose)
+    testImplementation(libs.koin.test)
+    androidTestImplementation(libs.koin.android.test)
 
     testImplementation(libs.junit)
 

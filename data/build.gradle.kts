@@ -61,6 +61,8 @@ dependencies {
     implementation(libs.ktor.serialization.kotlinx.json)
 
     implementation(libs.koin.androidx.compose)
+    testImplementation(libs.koin.test)
+    androidTestImplementation(libs.koin.android.test)
 
     implementation(libs.sqldelight.android.driver)
     implementation(libs.sqldelight.coroutines.extensions)

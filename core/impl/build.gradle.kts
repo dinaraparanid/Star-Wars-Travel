@@ -52,6 +52,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.koin.androidx.compose)
+    testImplementation(libs.koin.test)
+    androidTestImplementation(libs.koin.android.test)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

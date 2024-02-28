@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.paranid5.star_wars_travel.core.common.domain.use_case.prettifyNumber
 import com.paranid5.star_wars_travel.impl.presentation.AstroInfo
 import com.paranid5.star_wars_travel.impl.presentation.PhysInfo
 import com.paranid5.star_wars_travel.impl.presentation.SocInfo
@@ -25,6 +26,7 @@ import com.paranid5.star_wars_travel.planets.presentation.HeaderText
 import com.paranid5.star_wars_travel.planets.presentation.LabelList
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 
@@ -77,39 +79,43 @@ internal fun InfoMenu(
 @Composable
 internal fun AstroInfo.toEntryList() =
     persistentListOf(
-        stringResource(R.string.region) to region.toList(),
-        sector?.let { stringResource(R.string.sector) to listOf(it) },
-        system?.let { stringResource(R.string.system) to listOf(it) },
-        moons.takeIf { it > 0 }?.let { stringResource(R.string.moons) to listOf(it.toString()) },
-        stringResource(R.string.rotation_period) to listOf(rotationPeriod.toString()),
-        stringResource(R.string.orbital_period) to listOf(orbitalPeriod.toString()),
-        stringResource(R.string.trade_routes) to tradeRoutes.toList()
+        stringResource(R.string.region) to region.toImmutableList(),
+        sector?.let { stringResource(R.string.sector) to persistentListOf(it) },
+        system?.let { stringResource(R.string.system) to persistentListOf(it) },
+        moons.takeIf { it > 0 }?.let { stringResource(R.string.moons) to persistentListOf(it.toString()) },
+        stringResource(R.string.rotation_period) to persistentListOf(rotationPeriod.toString()),
+        stringResource(R.string.orbital_period) to persistentListOf(orbitalPeriod.toString()),
+        stringResource(R.string.trade_routes) to tradeRoutes.toImmutableList()
     ).filterNotNullOrEmpty()
 
 @Composable
 internal fun PhysInfo.toEntryList() =
     persistentListOf(
-        planetClass?.let { stringResource(R.string.planet_class) to listOf(it) },
-        stringResource(R.string.climate) to listOf(climate),
-        diameter.takeIf { it > 0 }?.let { stringResource(R.string.diameter) to listOf(it.toString()) },
-        stringResource(R.string.gravity) to listOf(gravity),
-        atmosphere?.let { stringResource(R.string.atmosphere) to listOf(it) },
-        stringResource(R.string.terrain) to listOf(terrain),
-        stringResource(R.string.surface_water) to listOf(surfaceWater.toString()),
-        stringResource(R.string.flora) to flora.toList(),
-        stringResource(R.string.fauna) to fauna.toList()
+        planetClass?.let { stringResource(R.string.planet_class) to persistentListOf(it) },
+        stringResource(R.string.climate) to persistentListOf(climate),
+        diameter.takeIf { it > 0 }?.let {
+            stringResource(R.string.diameter) to persistentListOf(prettifyNumber(it.toString()))
+        },
+        stringResource(R.string.gravity) to persistentListOf(gravity),
+        atmosphere?.let { stringResource(R.string.atmosphere) to persistentListOf(it) },
+        stringResource(R.string.terrain) to persistentListOf(terrain),
+        stringResource(R.string.surface_water) to persistentListOf(surfaceWater.toString()),
+        stringResource(R.string.flora) to flora.toImmutableList(),
+        stringResource(R.string.fauna) to fauna.toImmutableList()
     ).filterNotNullOrEmpty()
 
 @Composable
 internal fun SocInfo.toEntryList() =
     persistentListOf(
-        population.takeIf { it > 0 }?.let { stringResource(R.string.population) to listOf(it.toString()) },
-        stringResource(R.string.native_spec) to nativeSpecies.toList(),
-        stringResource(R.string.other_spec) to otherSpecies.toList(),
-        stringResource(R.string.languages) to primaryLanguages.toList(),
-        government?.let { stringResource(R.string.government) to listOf(it) },
-        stringResource(R.string.major_cities) to majorCities.toList()
+        population.takeIf { it > 0 }?.let {
+            stringResource(R.string.population) to persistentListOf(prettifyNumber(it.toString()))
+        },
+        stringResource(R.string.native_spec) to nativeSpecies.toImmutableList(),
+        stringResource(R.string.other_spec) to otherSpecies.toImmutableList(),
+        stringResource(R.string.languages) to primaryLanguages.toImmutableList(),
+        government?.let { stringResource(R.string.government) to persistentListOf(it) },
+        stringResource(R.string.major_cities) to majorCities.toImmutableList()
     ).filterNotNullOrEmpty()
 
-private fun List<Pair<String, List<String>>?>.filterNotNullOrEmpty() =
+private fun ImmutableList<Pair<String, ImmutableList<String>>?>.filterNotNullOrEmpty() =
     filterNotNull().filter { it.second.isNotEmpty() }.toImmutableList()
