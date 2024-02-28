@@ -13,7 +13,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
 
 @Composable
-fun RegionSelectors(
+internal fun RegionSelectors(
     planetsComponent: PlanetsComponent,
     modifier: Modifier = Modifier
 ) {

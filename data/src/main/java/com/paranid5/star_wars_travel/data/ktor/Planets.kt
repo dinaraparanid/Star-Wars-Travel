@@ -7,7 +7,7 @@ import com.paranid5.star_wars_travel.data.ktor.swapi.getSwapiPlanets
 import com.paranid5.star_wars_travel.data.ktor.wookiepedia.PlanetDTO
 import io.ktor.client.HttpClient
 
-suspend fun HttpClient.getPlanets(pageNumber: Int = 1) =
+internal suspend fun HttpClient.getPlanets(pageNumber: Int = 1) =
     getSwapiPlanets(pageNumber)
         .getOrElse {
             SwapiPlanetPage(0, null, null, emptyList())

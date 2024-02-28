@@ -25,7 +25,7 @@ import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun ThemeMenu(
+internal fun ThemeMenu(
     settingsComponent: SettingsComponent,
     modifier: Modifier = Modifier
 ) {

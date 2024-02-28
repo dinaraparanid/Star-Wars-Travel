@@ -16,7 +16,7 @@ import com.paranid5.star_wars_travel.planets.presentation.coverModel
 import com.paranid5.star_wars_travel.resources.R
 
 @Composable
-fun PlanetCover(
+internal fun PlanetCover(
     planet: PlanetUiState,
     modifier: Modifier = Modifier,
     roundedCorners: Dp = 8.dp

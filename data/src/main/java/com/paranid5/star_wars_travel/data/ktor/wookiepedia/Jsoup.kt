@@ -14,7 +14,7 @@ private const val WOOKIEPEDIA_BASE_URL = "https://starwars.fandom.com/wiki"
 
 internal val CITATION_REGEX = Regex("\\[\\d+]")
 
-suspend fun PlanetDTO(planet: SwapiPlanet, pageNumber: Int) = coroutineScope {
+internal suspend fun PlanetDTO(planet: SwapiPlanet, pageNumber: Int) = coroutineScope {
     val html = WookieHtml(planet.name).getOrNull()
     val shortDescription = html?.shortDescription()?.getOrNull()
 

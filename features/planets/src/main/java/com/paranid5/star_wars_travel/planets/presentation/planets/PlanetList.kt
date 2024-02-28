@@ -15,7 +15,7 @@ import com.paranid5.star_wars_travel.navigation.composition_locals.LocalNavigato
 import com.paranid5.star_wars_travel.planets.presentation.planets.item.PlanetItem
 
 @Composable
-fun PlanetList(
+internal fun PlanetList(
     planetsComponent: PlanetsComponent,
     modifier: Modifier = Modifier
 ) {

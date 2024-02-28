@@ -5,7 +5,7 @@ import com.paranid5.star_wars_travel.data.ktor.swapi.SwapiPlanetPage
 import com.paranid5.star_wars_travel.data.ktor.swapi.getSwapiPlanets
 import io.ktor.client.HttpClient
 
-class PlanetsNetSourceImpl(private val ktorClient: HttpClient) : PlanetsNetSource {
+internal class PlanetsNetSourceImpl(private val ktorClient: HttpClient) : PlanetsNetSource {
     override suspend fun fetchSwapiPlanetPage(pageNum: Int): SwapiPlanetPage =
         ktorClient
             .getSwapiPlanets(pageNum)

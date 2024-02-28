@@ -8,9 +8,8 @@ import com.paranid5.star_wars_travel.data.sqldelight.PlanetsDbSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
-class PlanetPagingSource(
+internal class PlanetPagingSource(
     private val netSource: PlanetsNetSource,
     private val dbSource: PlanetsDbSource,
 ) : PagingSource<Int, WookiepediaPlanet>(),

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,11 +26,12 @@ import com.paranid5.star_wars_travel.planets.presentation.LabelList
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 
-typealias InfoItems = List<Pair<String, List<String>>>
+internal typealias InfoItems = List<Pair<String, List<String>>>
 
 @Composable
-fun InfoMenu(
+internal fun InfoMenu(
     mainLabel: String,
     items: InfoItems,
     modifier: Modifier = Modifier
@@ -75,7 +75,6 @@ fun InfoMenu(
 }
 
 @Composable
-@Stable
 internal fun AstroInfo.toEntryList() =
     persistentListOf(
         stringResource(R.string.region) to region.toList(),
@@ -85,10 +84,9 @@ internal fun AstroInfo.toEntryList() =
         stringResource(R.string.rotation_period) to listOf(rotationPeriod.toString()),
         stringResource(R.string.orbital_period) to listOf(orbitalPeriod.toString()),
         stringResource(R.string.trade_routes) to tradeRoutes.toList()
-    ).filterNotNull().filter { it.second.isNotEmpty() }
+    ).filterNotNullOrEmpty()
 
 @Composable
-@Stable
 internal fun PhysInfo.toEntryList() =
     persistentListOf(
         planetClass?.let { stringResource(R.string.planet_class) to listOf(it) },
@@ -100,10 +98,9 @@ internal fun PhysInfo.toEntryList() =
         stringResource(R.string.surface_water) to listOf(surfaceWater.toString()),
         stringResource(R.string.flora) to flora.toList(),
         stringResource(R.string.fauna) to fauna.toList()
-    ).filterNotNull().filter { it.second.isNotEmpty() }
+    ).filterNotNullOrEmpty()
 
 @Composable
-@Stable
 internal fun SocInfo.toEntryList() =
     persistentListOf(
         population.takeIf { it > 0 }?.let { stringResource(R.string.population) to listOf(it.toString()) },
@@ -112,4 +109,7 @@ internal fun SocInfo.toEntryList() =
         stringResource(R.string.languages) to primaryLanguages.toList(),
         government?.let { stringResource(R.string.government) to listOf(it) },
         stringResource(R.string.major_cities) to majorCities.toList()
-    ).filterNotNull().filter { it.second.isNotEmpty() }
+    ).filterNotNullOrEmpty()
+
+private fun List<Pair<String, List<String>>?>.filterNotNullOrEmpty() =
+    filterNotNull().filter { it.second.isNotEmpty() }.toImmutableList()

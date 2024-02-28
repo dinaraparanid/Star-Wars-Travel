@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun InterestList(
+internal fun InterestList(
     planet: PlanetUiState,
     planetComponent: PlanetComponent,
     modifier: Modifier = Modifier
@@ -43,9 +43,7 @@ fun InterestList(
         launch(Dispatchers.IO) { planetComponent.updateInterestsAsync(interests) }
 
         loadedPlanet = planet.copy(
-            physicalInformation = planet.physicalInformation.copy(
-                interest = interests.toTypedArray()
-            )
+            physicalInformation = planet.physicalInformation.copy(interest = interests)
         )
     }
 

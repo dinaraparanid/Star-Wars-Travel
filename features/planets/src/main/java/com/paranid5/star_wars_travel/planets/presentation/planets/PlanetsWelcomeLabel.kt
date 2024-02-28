@@ -13,7 +13,7 @@ import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun PlanetsWelcomeLabel(modifier: Modifier = Modifier) {
+internal fun PlanetsWelcomeLabel(modifier: Modifier = Modifier) {
     val colors = LocalAppColors.current
 
     Text(

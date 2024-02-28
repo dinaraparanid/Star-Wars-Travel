@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.sp
 import com.paranid5.star_wars_travel.core.common.domain.use_case.prettifyNumber
 
 @Composable
-fun PlanetInfoLabel(
+internal fun PlanetInfoLabel(
     info: String,
     modifier: Modifier = Modifier,
     maxLines: Int = 1,

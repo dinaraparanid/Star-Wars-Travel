@@ -15,7 +15,7 @@ import org.koin.compose.KoinContext
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun StarWarsTravelTheme(
+internal fun StarWarsTravelTheme(
     theme: Theme,
     content: @Composable () -> Unit
 ) {

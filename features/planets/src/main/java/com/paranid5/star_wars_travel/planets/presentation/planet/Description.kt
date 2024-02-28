@@ -25,7 +25,7 @@ import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun Description(
+internal fun Description(
     planetDescription: String,
     modifier: Modifier = Modifier
 ) {

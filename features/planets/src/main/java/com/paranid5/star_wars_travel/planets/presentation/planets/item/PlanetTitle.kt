@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 import com.paranid5.star_wars_travel.resources.ui.StarJediFont
 
 @Composable
-fun PlanetTitle(
+internal fun PlanetTitle(
     planetTitle: String,
     modifier: Modifier = Modifier,
     fontSize: TextUnit = 14.sp

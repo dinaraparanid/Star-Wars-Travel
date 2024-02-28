@@ -9,7 +9,7 @@ import com.paranid5.star_wars_travel.presentation.appbar.AppBar
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun App(modifier: Modifier = Modifier) {
+internal fun App(modifier: Modifier = Modifier) {
     Box(modifier) {
         ScreenScaffold(Modifier.fillMaxSize())
     }

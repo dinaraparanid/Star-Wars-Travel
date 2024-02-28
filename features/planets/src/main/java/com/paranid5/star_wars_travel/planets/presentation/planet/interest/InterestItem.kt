@@ -23,7 +23,7 @@ import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun InterestItem(
+internal fun InterestItem(
     interest: Interest,
     modifier: Modifier = Modifier
 ) {

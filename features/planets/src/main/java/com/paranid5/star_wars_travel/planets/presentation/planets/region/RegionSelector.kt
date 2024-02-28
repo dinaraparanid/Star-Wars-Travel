@@ -22,7 +22,7 @@ import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 
 @Composable
-fun RegionSelector(
+internal fun RegionSelector(
     region: String?,
     isSelected: Boolean,
     planetsComponent: PlanetsComponent,

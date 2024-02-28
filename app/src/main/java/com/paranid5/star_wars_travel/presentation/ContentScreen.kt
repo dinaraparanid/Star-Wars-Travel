@@ -20,7 +20,7 @@ import com.paranid5.star_wars_travel.planets.presentation.planets.PlanetsScreen
 import com.paranid5.star_wars_travel.settings.presentation.SettingsScreen
 
 @Composable
-fun ContentScreen(
+internal fun ContentScreen(
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
 ) {

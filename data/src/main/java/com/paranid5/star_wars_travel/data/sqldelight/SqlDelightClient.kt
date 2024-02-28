@@ -6,7 +6,7 @@ import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.paranid5.star_wars_travel.data.Planets
 
-fun SqlDelightClient(context: Context): SqlDriver =
+internal fun SqlDelightClient(context: Context): SqlDriver =
     AndroidSqliteDriver(
         schema = Planets.Schema,
         context = context,

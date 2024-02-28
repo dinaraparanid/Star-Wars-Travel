@@ -13,7 +13,7 @@ import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.AppBarColor
 
 @Composable
-fun AppBar(modifier: Modifier = Modifier) =
+internal fun AppBar(modifier: Modifier = Modifier) =
     BottomAppBar(
         containerColor = AppBarColor,
         modifier = modifier

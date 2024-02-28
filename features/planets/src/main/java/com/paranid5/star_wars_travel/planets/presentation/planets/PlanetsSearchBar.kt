@@ -34,7 +34,7 @@ import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 
 @Composable
-fun PlanetsSearchBar(
+internal fun PlanetsSearchBar(
     planetsComponent: PlanetsComponent,
     modifier: Modifier = Modifier
 ) {

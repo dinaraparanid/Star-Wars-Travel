@@ -28,7 +28,7 @@ import com.paranid5.star_wars_travel.resources.ui.StarWarsHologram
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 
 @Composable
-fun AppBarItem(
+internal fun AppBarItem(
     title: String,
     image: ImageVector,
     screen: RootConfig,
@@ -41,7 +41,7 @@ fun AppBarItem(
 )
 
 @Composable
-fun AppBarItem(
+internal fun AppBarItem(
     title: String,
     image: Painter,
     screen: RootConfig,

@@ -12,7 +12,7 @@ import com.paranid5.star_wars_travel.impl.presentation.mainRegion
 import com.paranid5.star_wars_travel.resources.R
 
 @Composable
-fun PlanetDescription(planet: PlanetUiState, modifier: Modifier = Modifier) =
+internal fun PlanetDescription(planet: PlanetUiState, modifier: Modifier = Modifier) =
     Column(modifier) {
         PlanetTitle(planet.title)
 

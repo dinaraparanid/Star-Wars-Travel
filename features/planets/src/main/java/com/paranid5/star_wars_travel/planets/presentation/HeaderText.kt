@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.sp
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun HeaderText(
+internal fun HeaderText(
     text: String,
     modifier: Modifier = Modifier,
     textSize: TextUnit = 20.sp

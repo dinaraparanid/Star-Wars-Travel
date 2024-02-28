@@ -26,7 +26,7 @@ import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 
 @Composable
-fun TravelButton(planet: PlanetUiState, modifier: Modifier = Modifier) {
+internal fun TravelButton(planet: PlanetUiState, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val onClickMessage = stringResource(R.string.enjoy_journey_to, planet.title)
 

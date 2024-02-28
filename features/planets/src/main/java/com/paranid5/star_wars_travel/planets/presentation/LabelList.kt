@@ -14,7 +14,7 @@ import com.paranid5.star_wars_travel.planets.presentation.planet.InfoItems
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun LabelList(items: InfoItems, modifier: Modifier = Modifier) {
+internal fun LabelList(items: InfoItems, modifier: Modifier = Modifier) {
     val colors = LocalAppColors.current
 
     Column(

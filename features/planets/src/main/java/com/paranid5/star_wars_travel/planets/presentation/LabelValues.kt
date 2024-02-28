@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 
 @Composable
-fun LabelValues(values: List<String>, modifier: Modifier = Modifier) =
+internal fun LabelValues(values: List<String>, modifier: Modifier = Modifier) =
     when (values.size) {
         1 -> SingleValue(
             value = values.first(),
