@@ -33,7 +33,7 @@ class RootComponent(
     fun navigateToPlanets() =
         navigation.bringToFront(previousPlanetsConfigOrDefault())
 
-    fun navigateToPlanet(planet: PlanetUiState) =
+    infix fun navigateToPlanet(planet: PlanetUiState) =
         navigation.bringToFront(RootConfig.Planet(planet))
 
     fun navigateToSettings() =

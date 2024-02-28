@@ -51,7 +51,10 @@ internal fun InterestList(
         modifier = modifier,
         contentPadding = PaddingValues(end = 16.dp)
     ) {
-        items(loadedPlanet.physicalInformation.interest) {
+        items(
+            items = loadedPlanet.physicalInformation.interest,
+            key = { it.value }
+        ) {
             Row {
                 InterestItem(
                     interest = it,

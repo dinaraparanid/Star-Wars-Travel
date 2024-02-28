@@ -29,15 +29,15 @@ internal fun PlanetList(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(planets.itemCount, key = { it }) {
-            val planet = planets[it]!!
-
-            PlanetItem(
-                planet = planet,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { navigator.navigateToPlanet(planet) }
-            )
+        items(planets.itemCount, key = { it }) { index ->
+            planets[index]?.let {
+                PlanetItem(
+                    planet = it,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { navigator.navigateToPlanet(it) }
+                )
+            }
 
             Spacer(Modifier.height(8.dp))
         }
