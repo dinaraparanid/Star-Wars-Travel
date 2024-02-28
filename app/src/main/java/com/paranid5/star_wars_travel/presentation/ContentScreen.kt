@@ -1,10 +1,13 @@
 package com.paranid5.star_wars_travel.presentation
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
@@ -22,13 +25,16 @@ fun ContentScreen(
     modifier: Modifier = Modifier,
 ) {
     val navigator = LocalNavigator.current!!
+    val direction = LocalLayoutDirection.current
 
     Children(
         stack = navigator.stack,
         animation = stackAnimation(fade()),
         modifier = modifier.padding(
             top = 0.dp,
-            bottom = paddingValues.calculateBottomPadding()
+            bottom = paddingValues.calculateBottomPadding(),
+            start = paddingValues.calculateStartPadding(direction),
+            end = paddingValues.calculateEndPadding(direction)
         )
     ) {
         when (val child = it.instance) {
