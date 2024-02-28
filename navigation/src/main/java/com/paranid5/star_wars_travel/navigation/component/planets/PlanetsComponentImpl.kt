@@ -1,4 +1,4 @@
-package com.paranid5.star_wars_travel.navigation.component
+package com.paranid5.star_wars_travel.navigation.component.planets
 
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -7,7 +7,9 @@ import androidx.paging.map
 import com.arkivanov.decompose.ComponentContext
 import com.paranid5.star_wars_travel.data.PlanetsRepository
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
+import com.paranid5.star_wars_travel.impl.presentation.RegionUiState
 import com.paranid5.star_wars_travel.impl.presentation.mainRegion
+import com.paranid5.star_wars_travel.navigation.component.componentCoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,30 +17,30 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 
-class PlanetsComponent(
+class PlanetsComponentImpl(
     private val planetsRepository: PlanetsRepository,
     componentContext: ComponentContext
-) : ComponentContext by componentContext {
+) : ComponentContext by componentContext, PlanetsComponent {
     private val _searchTextState by lazy {
         MutableStateFlow("")
     }
 
-    val searchTextState by lazy {
+    override val searchTextState by lazy {
         _searchTextState.asStateFlow()
     }
 
-    fun setSearchText(text: String) =
+    override fun setSearchText(text: String) =
         _searchTextState.update { text }
 
     private val _selectedRegionsState by lazy {
         MutableStateFlow(listOf<String?>(null))
     }
 
-    val selectedRegionsState by lazy {
+    override val selectedRegionsState by lazy {
         _selectedRegionsState.asStateFlow()
     }
 
-    fun reselectRegion(region: String?) =
+    override fun reselectRegion(region: String?) =
         when (region) {
             null -> _selectedRegionsState.update { listOf(null) }
             else -> _selectedRegionsState.update {
@@ -59,7 +61,7 @@ class PlanetsComponent(
             .cachedIn(componentCoroutineScope())
     }
 
-    val planetsFlow by lazy {
+    override val planetsFlow by lazy {
         combine(
             planetsUiFlow,
             searchTextState,
@@ -73,14 +75,14 @@ class PlanetsComponent(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val regionsFlow by lazy {
+    override val regionsFlow by lazy {
         combine(planetsUiFlow, _selectedRegionsState) { planets, regs ->
             planets
                 .map { it.mainRegion ?: "" }
                 .filter { it.isNotEmpty() }
                 .to(regs)
         }.mapLatest { (allRegs, selectRegs) ->
-            allRegs.map { it to (it in selectRegs) }
+            allRegs.map { RegionUiState(it, (it in selectRegs)) }
         }
     }
 }

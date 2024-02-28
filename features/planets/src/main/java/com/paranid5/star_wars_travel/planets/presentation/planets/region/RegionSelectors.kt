@@ -10,7 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
+import com.paranid5.star_wars_travel.navigation.component.planets.PlanetsComponent
 
 @Composable
 internal fun RegionSelectors(

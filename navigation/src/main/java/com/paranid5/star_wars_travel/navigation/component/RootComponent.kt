@@ -9,6 +9,10 @@ import com.arkivanov.decompose.value.Value
 import com.paranid5.star_wars_travel.core.common.presentation.ThemeProvider
 import com.paranid5.star_wars_travel.data.PlanetsRepository
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
+import com.paranid5.star_wars_travel.navigation.component.about_app.AboutAppComponentImpl
+import com.paranid5.star_wars_travel.navigation.component.planet.PlanetComponentImpl
+import com.paranid5.star_wars_travel.navigation.component.planets.PlanetsComponentImpl
+import com.paranid5.star_wars_travel.navigation.component.settings.SettingsComponentImpl
 
 class RootComponent(
     componentContext: ComponentContext,
@@ -49,19 +53,19 @@ class RootComponent(
     private fun child(config: RootConfig, componentContext: ComponentContext) =
         when (config) {
             RootConfig.Planets -> RootComponentChild.PlanetsChild(
-                PlanetsComponent(planetsRepository, componentContext)
+                PlanetsComponentImpl(planetsRepository, componentContext)
             )
 
             is RootConfig.Planet -> RootComponentChild.PlanetChild(
-                PlanetComponent(config.planet, planetsRepository, componentContext)
+                PlanetComponentImpl(config.planet, planetsRepository, componentContext)
             )
 
             RootConfig.AboutApp -> RootComponentChild.AboutAppChild(
-                AboutAppComponent(componentContext)
+                AboutAppComponentImpl(componentContext)
             )
 
             RootConfig.Settings -> RootComponentChild.SettingsChild(
-                SettingsComponent(themeProvider, componentContext)
+                SettingsComponentImpl(themeProvider, componentContext)
             )
         }
 

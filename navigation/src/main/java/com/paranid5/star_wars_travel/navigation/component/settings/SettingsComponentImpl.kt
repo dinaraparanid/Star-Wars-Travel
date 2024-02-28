@@ -1,18 +1,18 @@
-package com.paranid5.star_wars_travel.navigation.component
+package com.paranid5.star_wars_travel.navigation.component.settings
 
 import com.arkivanov.decompose.ComponentContext
 import com.paranid5.star_wars_travel.core.common.presentation.Theme
 import com.paranid5.star_wars_travel.core.common.presentation.ThemeProvider
 
-class SettingsComponent(
+class SettingsComponentImpl(
     private val themeProvider: ThemeProvider,
     componentContext: ComponentContext
-) : ComponentContext by componentContext {
-    val themeState by lazy {
+) : ComponentContext by componentContext, SettingsComponent {
+    override val themeState by lazy {
         themeProvider.themeState
     }
 
-    fun resetTheme() =
+    override fun resetTheme() =
         themeProvider.setTheme(alternativeTheme(themeState.value))
 }
 

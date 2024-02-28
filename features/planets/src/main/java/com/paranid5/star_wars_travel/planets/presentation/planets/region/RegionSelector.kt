@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
+import com.paranid5.star_wars_travel.navigation.component.planets.PlanetsComponent
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow
 

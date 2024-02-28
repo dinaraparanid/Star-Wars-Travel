@@ -28,7 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.paranid5.star_wars_travel.navigation.component.PlanetsComponent
+import com.paranid5.star_wars_travel.navigation.component.planets.PlanetsComponent
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 import com.paranid5.star_wars_travel.resources.ui.StarWarsYellow

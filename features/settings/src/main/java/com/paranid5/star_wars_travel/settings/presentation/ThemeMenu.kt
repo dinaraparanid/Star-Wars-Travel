@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.paranid5.star_wars_travel.core.common.presentation.Theme
-import com.paranid5.star_wars_travel.navigation.component.SettingsComponent
+import com.paranid5.star_wars_travel.navigation.component.settings.SettingsComponent
 import com.paranid5.star_wars_travel.resources.R
 import com.paranid5.star_wars_travel.resources.ui.LocalAppColors
 

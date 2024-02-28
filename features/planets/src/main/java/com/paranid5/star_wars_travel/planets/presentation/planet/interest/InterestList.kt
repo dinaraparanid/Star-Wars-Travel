@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.paranid5.star_wars_travel.data.ktor.wookiepedia.loadInterestCover
 import com.paranid5.star_wars_travel.impl.presentation.Interest
 import com.paranid5.star_wars_travel.impl.presentation.PlanetUiState
-import com.paranid5.star_wars_travel.navigation.component.PlanetComponent
+import com.paranid5.star_wars_travel.navigation.component.planet.PlanetComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

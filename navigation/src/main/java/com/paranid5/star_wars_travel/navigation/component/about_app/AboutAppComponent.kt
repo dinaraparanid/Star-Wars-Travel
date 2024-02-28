@@ -1,0 +1,3 @@
+package com.paranid5.star_wars_travel.navigation.component.about_app
+
+interface AboutAppComponent
