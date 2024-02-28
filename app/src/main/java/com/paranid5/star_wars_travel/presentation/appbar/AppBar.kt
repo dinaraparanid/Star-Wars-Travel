@@ -23,7 +23,8 @@ fun AppBar(modifier: Modifier = Modifier) =
             title = stringResource(R.string.planets),
             image = painterResource(R.drawable.planet),
             screen = RootConfig.Planets,
-            modifier = Modifier.weight(1F)
+            modifier = Modifier.weight(1F),
+            screenMatches = { it is RootConfig.Planets || it is RootConfig.Planet }
         )
 
         AppBarItem(

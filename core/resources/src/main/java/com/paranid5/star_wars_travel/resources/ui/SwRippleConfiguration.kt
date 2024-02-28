@@ -6,13 +6,13 @@ import androidx.compose.material.RippleDefaults
 
 private val SWRippleAlpha =
     RippleDefaults.rippleAlpha(
-        contentColor = StarWarsYellow,
+        contentColor = StarWarsHologram,
         lightTheme = true
     )
 
 @OptIn(ExperimentalMaterialApi::class)
 val SWRippleConfinguration =
     RippleConfiguration(
-        color = StarWarsYellow,
+        color = StarWarsHologram,
         rippleAlpha = SWRippleAlpha
     )
